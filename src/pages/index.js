@@ -5,6 +5,7 @@ import HomeHero from '../components/home/Hero';
 import Layout from '../components/Layout';
 import FeaturedProducts from '../components/home/FeaturedProducts';
 import Reviews from '../components/home/Reviews';
+import Footer from '../components/Footer';
 
 const IndexPage = (props) => {
   const { data } = props;
@@ -18,6 +19,7 @@ const IndexPage = (props) => {
         <HomeHero homeContent={homeContent} />
         <FeaturedProducts homeContent={homeContent} />
         <Reviews homeContent={homeContent} />
+        <Footer />
       </Layout>
     </>
   );
