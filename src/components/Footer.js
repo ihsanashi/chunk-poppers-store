@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Container from './Container';
 import Logo from '../images/cp-logo.png';
+import { FaInstagram, FaFacebookSquare, FaRegEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
+  const date = new Date();
   return (
     <footer className='pt-12 pb-10'>
       <Container>
@@ -16,6 +18,9 @@ const Footer = () => {
               Varius in tempor ipsum, amet at sed elit massa proin. A sagittis,
               eget malesuada dui.
             </h6>
+            <p className='text-sm text-gray-600'>
+              2015 - {date.getFullYear()} &copy; Chunk Poppers
+            </p>
           </div>
           <div>
             <h5 className='uppercase font-medium text-sm tracking-wide'>
@@ -48,6 +53,40 @@ const Footer = () => {
             </p>
           </div>
           <h2>Hello</h2>
+        </section>
+        <div className='border-b-2 border-gray-200 my-5'></div>
+        <section className='flex flex-col sm:flex-row items-start md:items-center justify-between'>
+          <div className='flex flex-row items-center'>
+            <a
+              className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
+              href='https://instagram.com'
+              target='_blank'
+            >
+              <FaInstagram size={20} />
+            </a>
+            <a
+              className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
+              href='https://facebook.com'
+              target='_blank'
+            >
+              <FaFacebookSquare size={20} />
+            </a>
+            <a
+              className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
+              href='mailto:hello@chunkpoppers.com'
+              target='_blank'
+            >
+              <FaRegEnvelope size={20} />
+            </a>
+          </div>
+          <div className='flex flex-row items-center mt-5 sm:mt-0'>
+            <Link to='/'>
+              <p className='text-sm text-gray-600 mr-5'>Privacy Policy</p>
+            </Link>
+            <Link to='/'>
+              <p className='text-sm text-gray-600'>Terms & Conditions</p>
+            </Link>
+          </div>
         </section>
       </Container>
     </footer>
