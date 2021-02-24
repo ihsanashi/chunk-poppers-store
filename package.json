@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "Chunk Poppers store",
-  "author": "Ahmad",
+  "author": "Ahmad Ihsan",
   "keywords": [
+    "Chunk Poppers",
+    "Online bakery",
     "gatsby"
   ],
   "scripts": {
