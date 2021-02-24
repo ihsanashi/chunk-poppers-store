@@ -17,11 +17,11 @@ const nav_links = [
   },
   {
     name: 'About us',
-    link: '/about-us',
+    link: '/about',
   },
   {
     name: 'Contact us',
-    link: '/contact-us',
+    link: '/contact',
   },
 ];
 
