@@ -1,7 +1,6 @@
 import React from 'react';
 import Img from 'gatsby-image';
 import Container from '../Container';
-import PortableText from 'react-portable-text';
 
 const ContactInfo = ({ contactContent }) => {
   console.log(contactContent);
