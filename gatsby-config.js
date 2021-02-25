@@ -21,7 +21,9 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: 'src/images/icon.png',
+        name: 'Chunk Poppers',
+        start_url: '/',
+        icon: 'src/images/cp-logo.png',
       },
     },
     {
