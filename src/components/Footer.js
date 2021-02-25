@@ -61,6 +61,7 @@ const Footer = () => {
               className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
               href='https://instagram.com'
               target='_blank'
+              rel='noreferrer'
             >
               <FaInstagram size={20} />
             </a>
@@ -68,6 +69,7 @@ const Footer = () => {
               className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
               href='https://facebook.com'
               target='_blank'
+              rel='noreferrer'
             >
               <FaFacebookSquare size={20} />
             </a>
@@ -75,6 +77,7 @@ const Footer = () => {
               className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
               href='mailto:hello@chunkpoppers.com'
               target='_blank'
+              rel='noreferrer'
             >
               <FaRegEnvelope size={20} />
             </a>
