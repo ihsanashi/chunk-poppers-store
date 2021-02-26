@@ -12,7 +12,7 @@ const IndexPage = (props) => {
   return (
     <>
       <Helmet>
-        <title>Chunk Poppers - Home</title>
+        <title>Home - Chunk Poppers</title>
       </Helmet>
       <Layout>
         <HomeHero homeContent={homeContent} />
@@ -29,7 +29,7 @@ export const query = graphql`
   query {
     sanityHome {
       title
-      hero_image {
+      heroImage {
         caption
         asset {
           fluid(maxWidth: 1000) {
@@ -37,7 +37,7 @@ export const query = graphql`
           }
         }
       }
-      second_image {
+      secondImage {
         caption
         asset {
           fluid(maxWidth: 720) {
@@ -45,7 +45,7 @@ export const query = graphql`
           }
         }
       }
-      third_image {
+      thirdImage {
         caption
         asset {
           fluid(maxWidth: 720) {
@@ -53,7 +53,7 @@ export const query = graphql`
           }
         }
       }
-      featured_products {
+      featuredProducts {
         title
         slug {
           current
@@ -70,14 +70,14 @@ export const query = graphql`
           }
         }
       }
-      testimonial_subtitle
-      testimonial_title
+      testimonialSubtitle
+      testimonialTitle
       reviews {
         _key
         quote
-        customer_name
-        order_summary
-        customer_avatar {
+        customerName
+        orderSummary
+        customerAvatar {
           asset {
             fixed(width: 50, height: 50) {
               ...GatsbySanityImageFixed

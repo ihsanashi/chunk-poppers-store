@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import Container from '../Container';
 
 const FeaturedProducts = ({ homeContent }) => {
-  const featuredProducts = homeContent.featured_products;
+  const featuredProducts = homeContent.featuredProducts;
 
   return (
     <Container>

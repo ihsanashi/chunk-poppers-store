@@ -11,7 +11,7 @@ const ContactPage = (props) => {
   return (
     <>
       <Helmet>
-        <title>Chunk Poppers - Contact Us</title>
+        <title>Contact Us - Chunk Poppers</title>
       </Helmet>
       <Layout>
         <ContactHero />
@@ -26,9 +26,9 @@ export default ContactPage;
 export const query = graphql`
   query {
     sanityContact {
-      section_title
-      section_subtitle
-      contact_info {
+      sectionTitle
+      sectionSubtitle
+      contactInfo {
         _key
         title
         subtitle

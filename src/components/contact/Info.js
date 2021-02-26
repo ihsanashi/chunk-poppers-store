@@ -9,14 +9,14 @@ const ContactInfo = ({ contactContent }) => {
       <section>
         <div className='max-w-md mx-auto text-center mb-12'>
           <h3 className='font-semibold text-gray-900 text-3xl lg:text-4xl'>
-            {contactContent.section_title}
+            {contactContent.sectionTitle}
           </h3>
           <p className='text-gray-600 font-normal text-base mt-2'>
-            {contactContent.section_subtitle}
+            {contactContent.sectionSubtitle}
           </p>
         </div>
         <div className='max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5'>
-          {contactContent.contact_info.map((item) => (
+          {contactContent.contactInfo.map((item) => (
             <div
               className='flex flex-row items-start justify-start'
               key={item._key}
