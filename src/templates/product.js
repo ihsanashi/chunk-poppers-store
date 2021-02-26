@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
@@ -10,6 +10,8 @@ const ProductPage = (props) => {
   const product = data && data.product;
   const categorySlug = product.category.slug.current;
   console.log(product);
+
+  const [variantName, setVariantName] = useState('');
 
   return (
     <>
@@ -59,11 +61,15 @@ const ProductPage = (props) => {
                       type='radio'
                       id={item.name}
                       name='variant'
-                      value={item.name}
+                      value={item.price}
+                      onChange={() => setVariantName(item.price)}
                     />
                     <label htmlFor='variant'>{item.name}</label>
                   </div>
                 ))}
+                <div>
+                  <h2>Price: RM{variantName ? variantName : '0'}</h2>
+                </div>
               </div>
             </div>
           </section>
