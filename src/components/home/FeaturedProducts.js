@@ -12,13 +12,16 @@ const FeaturedProducts = ({ homeContent }) => {
         <h3 className='text-center text-2xl font-medium mb-10'>Featured</h3>
         <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
           {featuredProducts.map((item) => (
-            <Link to='#' key={item.title}>
+            <Link
+              to={`/shop/category/${item.category.slug.current}/${item.slug.current}`}
+              key={item.title}
+            >
               <article className='my-2 lg:my-0'>
                 <Img fluid={item.media[0].asset.fluid} />
                 <h5 className='mt-4 mb-1 text-base font-medium text-gray-800'>
                   {item.title}
                 </h5>
-                <p className='text-sm text-gray-600'>{`From RM ${item.variants[0].price}`}</p>
+                <p className='text-sm text-gray-600'>{`From RM${item.variants[0].price}`}</p>
               </article>
             </Link>
           ))}
