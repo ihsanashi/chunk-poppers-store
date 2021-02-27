@@ -55,6 +55,11 @@ export const query = graphql`
       }
       featuredProducts {
         title
+        category {
+          slug {
+            current
+          }
+        }
         slug {
           current
         }
