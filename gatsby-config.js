@@ -1,6 +1,11 @@
+const path = require('path');
+
 module.exports = {
   siteMetadata: {
     title: 'Chunk Poppers store',
+    description: '',
+    author: 'Ahmad Ihsan',
+    siteUrl: 'https://chunkpoppers.netlify.app/',
   },
   plugins: [
     {
@@ -30,7 +35,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: './src/images/',
+        path: path.join(__dirname, 'src', 'images'),
       },
       __key: 'images',
     },
