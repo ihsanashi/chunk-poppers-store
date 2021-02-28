@@ -5,15 +5,12 @@ import Img from 'gatsby-image';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import PortableText from '@sanity/block-content-to-react';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from 'react-accessible-accordion';
+import ProductAccordion from '../components/product/Accordion';
+import ProductAccordionItem from '../components/product/AccordionItem';
+import ReactBnbGallery from 'react-bnb-gallery';
 
-import 'react-accessible-accordion/dist/fancy-example.css';
+import '../styles/accordion.css';
+import 'react-bnb-gallery/dist/style.css';
 
 const ProductPage = (props) => {
   const { data, errors } = props;
@@ -64,6 +61,7 @@ const ProductPage = (props) => {
                 fluid={product.media[0].asset.fluid}
                 alt={product.media[0].caption}
               />
+              <ReactBnbGallery photos={product.media} />
             </div>
             <div>
               <h2 className='font-semibold text-gray-900 text-4xl'>
@@ -110,78 +108,58 @@ const ProductPage = (props) => {
                   </button>
                 </div>
                 <div>
-                  <Accordion preExpanded={['description']}>
-                    <AccordionItem uuid='description'>
-                      <AccordionItemHeading>
-                        <AccordionItemButton className='text-lg font-medium text-gray-700'>
-                          Description and details
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <PortableText
-                          blocks={product._rawDescription}
-                          serializers={serializers}
-                        />
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                    <AccordionItem uuid='ingredients'>
-                      <AccordionItemHeading>
-                        <AccordionItemButton className='text-lg font-medium text-gray-700'>
-                          Ingredients
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <p>{product.ingredients}</p>
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                    <AccordionItem uuid='allergens'>
-                      <AccordionItemHeading>
-                        <AccordionItemButton className='text-lg font-medium text-gray-700'>
-                          Allergens
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <p>{product.allergens}</p>
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                    <AccordionItem uuid='includedItems'>
-                      <AccordionItemHeading>
-                        <AccordionItemButton className='text-lg font-medium text-gray-700'>
-                          Items included with this product
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <div className='grid grid-cols-2 gap-4'>
-                          {product.includedItems.map((item) => (
-                            <article key={item._id}>
-                              <Img
-                                fluid={item.image.asset.fluid}
-                                alt={item.image.caption}
-                              />
-                              <div>
-                                <h5 className='text-lg text-gray-600 mt-2 mb-1'>
-                                  {item.title}
-                                </h5>
-                                <p className='text-sm text-gray-500'>
-                                  {item.details}
-                                </p>
-                              </div>
-                            </article>
-                          ))}
-                        </div>
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                    <AccordionItem uuid='careInstructions'>
-                      <AccordionItemHeading>
-                        <AccordionItemButton className='text-lg font-medium text-gray-700'>
-                          Care instructions
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <p>{product.careInstructions}</p>
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                  </Accordion>
+                  <ProductAccordion
+                    preExpanded={['description']}
+                    allowZeroExpanded={true}
+                  >
+                    <ProductAccordionItem
+                      uuid='description'
+                      title='Description and details'
+                    >
+                      <PortableText
+                        blocks={product._rawDescription}
+                        serializers={serializers}
+                      />
+                    </ProductAccordionItem>
+                    <ProductAccordionItem
+                      uuid='ingredients'
+                      title='Ingredients'
+                    >
+                      <p>{product.ingredients}</p>
+                    </ProductAccordionItem>
+                    <ProductAccordionItem uuid='allergens' title='Allergens'>
+                      <p>{product.allergens}</p>
+                    </ProductAccordionItem>
+                    <ProductAccordionItem
+                      uuid='includedItems'
+                      title='Items included with this item'
+                    >
+                      <div className='grid grid-cols-2 gap-4'>
+                        {product.includedItems.map((item) => (
+                          <article key={item._id}>
+                            <Img
+                              fluid={item.image.asset.fluid}
+                              alt={item.image.caption}
+                            />
+                            <div>
+                              <h5 className='text-lg text-gray-600 mt-2 mb-1'>
+                                {item.title}
+                              </h5>
+                              <p className='text-sm text-gray-500'>
+                                {item.details}
+                              </p>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    </ProductAccordionItem>
+                    <ProductAccordionItem
+                      uuid='careInstructions'
+                      title='Care instructions'
+                    >
+                      <p>{product.careInstructions}</p>
+                    </ProductAccordionItem>
+                  </ProductAccordion>
                 </div>
               </div>
             </div>
