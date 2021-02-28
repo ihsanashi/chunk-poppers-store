@@ -7,10 +7,8 @@ import Container from '../components/Container';
 import PortableText from '@sanity/block-content-to-react';
 import ProductAccordion from '../components/product/Accordion';
 import ProductAccordionItem from '../components/product/AccordionItem';
-import ReactBnbGallery from 'react-bnb-gallery';
 
 import '../styles/accordion.css';
-import 'react-bnb-gallery/dist/style.css';
 
 const ProductPage = (props) => {
   const { data, errors } = props;
@@ -18,6 +16,7 @@ const ProductPage = (props) => {
   const categorySlug = product.category.slug.current;
 
   const [variantName, setVariantName] = useState('');
+  const [mainImageIndex, setMainImageIndex] = useState(0);
 
   const serializers = {
     types: {
@@ -58,10 +57,21 @@ const ProductPage = (props) => {
           >
             <div>
               <Img
-                fluid={product.media[0].asset.fluid}
-                alt={product.media[0].caption}
+                fluid={product.media[mainImageIndex].asset.fluid}
+                alt={product.media[mainImageIndex].caption}
               />
-              <ReactBnbGallery photos={product.media} />
+              <div className='grid grid-cols-4 gap-4 mt-5'>
+                {product.media.map((item, index) => (
+                  <figure
+                    className='cursor-pointer'
+                    index={index}
+                    key={item._key}
+                    onClick={() => setMainImageIndex(index)}
+                  >
+                    <Img fluid={item.asset.fluid} alt={item.caption} />
+                  </figure>
+                ))}
+              </div>
             </div>
             <div>
               <h2 className='font-semibold text-gray-900 text-4xl'>
@@ -98,7 +108,7 @@ const ProductPage = (props) => {
                     className={`text-white font-bold w-full py-2 px-4 rounded ${
                       variantName
                         ? 'bg-mountbattenPink-400 shadow-md hover:bg-mountbattenPink-500 hover:shadow-2xl'
-                        : 'bg-gray-300'
+                        : 'bg-gray-300 cursor-not-allowed'
                     }`}
                     disabled={true}
                   >
@@ -199,6 +209,7 @@ export const query = graphql`
         price
       }
       media {
+        _key
         caption
         asset {
           fluid(maxWidth: 600, maxHeight: 600) {
