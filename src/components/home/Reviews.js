@@ -19,20 +19,25 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const Reviews = ({ homeContent }) => {
   const customerReviews = homeContent.reviews;
-  console.log(customerReviews);
+
   return (
     <section className='py-12 bg-fuchsiaRose-700'>
       <Container>
         <h5 className='uppercase font-semibold text-sm text-center text-gray-300 mb-2 lg:mb-3'>
-          {homeContent.testimonial_subtitle}
+          {homeContent.testimonialSubtitle}
         </h5>
         <h3 className='font-semibold text-2xl lg:text-3xl text-center text-white w-full max-w-lg mx-auto'>
-          {homeContent.testimonial_title}
+          {homeContent.testimonialTitle}
         </h3>
-        <div className='w-full max-w-sm mx-auto mt-7'>
-          <Swiper spaceBetween={24} slidesPerView={1}>
+        <div className='w-full max-w-lg mx-auto mt-7'>
+          <Swiper
+            wrapperTag='ul'
+            spaceBetween={24}
+            slidesPerView={1}
+            navigation
+          >
             {customerReviews.map((item) => (
-              <SwiperSlide key={item._key}>
+              <SwiperSlide key={item._key} tag='li'>
                 <article className='bg-white rounded-md py-5 px-7'>
                   <p className='italic text-gray-700 font-normal'>
                     {item.quote}
@@ -42,15 +47,15 @@ const Reviews = ({ homeContent }) => {
                     <div className='h-12 w-12'>
                       <Img
                         className='rounded-full'
-                        fixed={item.customer_avatar.asset.fixed}
+                        fixed={item.customerAvatar.asset.fixed}
                       />
                     </div>
                     <div className='ml-5'>
                       <h6 className='text-gray-800 font-medium'>
-                        {item.customer_name}
+                        {item.customerName}
                       </h6>
                       <p className='text-gray-600 text-sm'>
-                        {item.order_summary}
+                        {item.orderSummary}
                       </p>
                     </div>
                   </div>
