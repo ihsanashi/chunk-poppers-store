@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
+import SingleProduct from '../components/product/Single';
 
 const CategoryPage = (props) => {
   const { data, errors } = props;
@@ -30,20 +30,13 @@ const CategoryPage = (props) => {
           </section>
           <section className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20'>
             {category.products.map((item) => (
-              <Link
-                to={`/shop/category/${categorySlug}/${item.slug.current}`}
-                key={item._id}
-              >
-                <div>
-                  <Img fluid={item.media[0].asset.fluid} />
-                  <h5 className='mt-5 mb-1 font-medium text-lg'>
-                    {item.title}
-                  </h5>
-                  <p className='text-gray-600 font-light'>
-                    From RM{item.variants[0].price}
-                  </p>
-                </div>
-              </Link>
+              <SingleProduct
+                link={`/shop/category/${categorySlug}/${item.slug.current}`}
+                _id={item._id}
+                imageSrc={item.media[0].asset.fluid}
+                title={item.title}
+                lowestPrice={item.variants[0].price}
+              />
             ))}
           </section>
         </Container>

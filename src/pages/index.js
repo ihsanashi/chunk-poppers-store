@@ -54,6 +54,7 @@ export const query = graphql`
         }
       }
       featuredProducts {
+        _id
         title
         category {
           slug {
