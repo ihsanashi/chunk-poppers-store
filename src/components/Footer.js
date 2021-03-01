@@ -7,7 +7,7 @@ import { FaInstagram, FaFacebookSquare, FaRegEnvelope } from 'react-icons/fa';
 const Footer = () => {
   const date = new Date();
   return (
-    <footer className='pt-12 pb-10'>
+    <footer className='pt-12 pb-10 mt-20 bg-gray-50'>
       <Container>
         <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-6'>
           <div className='col-span-1 lg:col-span-2'>
@@ -31,7 +31,7 @@ const Footer = () => {
                 <Link to='/'>Home</Link>
               </li>
               <li className='text-sm text-gray-600 my-5'>
-                <Link to='/'>Shop</Link>
+                <Link to='/shop'>Shop</Link>
               </li>
               <li className='text-sm text-gray-600 my-5'>
                 <Link to='/'>Services</Link>
@@ -40,7 +40,7 @@ const Footer = () => {
                 <Link to='/'>About us</Link>
               </li>
               <li className='text-sm text-gray-600 my-5'>
-                <Link to='/'>Contact us</Link>
+                <Link to='/contact'>Contact us</Link>
               </li>
             </ul>
           </div>
