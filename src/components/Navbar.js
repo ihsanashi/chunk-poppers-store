@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import nav_links from '../data/nav_links';
-import Logo from '../images/cp-logo.png';
+import Logo from './Logo';
 import { BiUserCircle, BiBasket } from 'react-icons/bi';
 
 const Navbar = () => {
@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className='flex items-center'>
           <div className='flex-grow-0'>
             <Link to='/'>
-              <img src={Logo} className='h-12 w-12' alt='Chunk Poppers logo' />
+              <Logo />
             </Link>
           </div>
           <div className='mx-auto'>
