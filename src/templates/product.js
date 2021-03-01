@@ -118,10 +118,7 @@ const ProductPage = (props) => {
                   </button>
                 </div>
                 <div>
-                  <ProductAccordion
-                    preExpanded={['description']}
-                    allowZeroExpanded={true}
-                  >
+                  <ProductAccordion>
                     <ProductAccordionItem
                       uuid='description'
                       title='Description and details'
