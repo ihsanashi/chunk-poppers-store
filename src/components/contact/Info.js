@@ -6,7 +6,7 @@ const ContactInfo = ({ contactContent }) => {
   console.log(contactContent);
   return (
     <Container>
-      <section>
+      <section className='mb-20'>
         <div className='max-w-md mx-auto text-center mb-12'>
           <h3 className='font-semibold text-gray-900 text-3xl lg:text-4xl'>
             {contactContent.sectionTitle}

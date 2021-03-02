@@ -16,7 +16,7 @@ const ShopLanding = (props) => {
       </Helmet>
       <Layout>
         <Container>
-          <section className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <section className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-20'>
             {categoryEdges.map((item) => (
               <Link
                 to={`/shop/category/${item.node.slug.current}`}
