@@ -31,6 +31,7 @@ const CategoryPage = (props) => {
           <section className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20'>
             {category.products.map((item) => (
               <SingleProduct
+                key={item._id}
                 link={`/shop/category/${categorySlug}/${item.slug.current}`}
                 _id={item._id}
                 imageSrc={item.media[0].asset.fluid}
