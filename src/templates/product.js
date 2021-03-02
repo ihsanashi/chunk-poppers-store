@@ -80,7 +80,7 @@ const ProductPage = (props) => {
               </div>
             </div>
             <div>
-              <h2 className='font-semibold text-gray-900 text-3xl lg:text-4xl'>
+              <h2 className='font-semibold text-gray-900 text-2xl md:text-3xl lg:text-4xl'>
                 {product.title}
               </h2>
               <div className='mt-5'>
@@ -186,7 +186,7 @@ const ProductPage = (props) => {
               You might also be interested in these items
             </h3>
             <div
-              className='grid grid-cols-4 gap-4
+              className='grid grid-cols-2 lg:grid-cols-4 gap-4
           '
             >
               {similarItemsEdges.map((item) => (
