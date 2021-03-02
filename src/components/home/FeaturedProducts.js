@@ -14,6 +14,7 @@ const FeaturedProducts = ({ homeContent }) => {
             <SingleProduct
               key={item._id}
               link={`/shop/category/${item.category.slug.current}/${item.slug.current}`}
+              _id={item._id}
               imageSrc={item.media[0].asset.fluid}
               title={item.title}
               lowestPrice={item.variants[0].price}
