@@ -7,7 +7,7 @@ const SingleProduct = ({ link, imageSrc, title, lowestPrice }) => {
     <Link to={link}>
       <div>
         <Img fluid={imageSrc} />
-        <h5 className='mt-3 mb-1 font-medium text-lg'>{title}</h5>
+        <h5 className='mt-3 mb-1 font-medium text-base md:text-lg'>{title}</h5>
         <p className='text-gray-600 text-sm font-light'>From RM{lowestPrice}</p>
       </div>
     </Link>
