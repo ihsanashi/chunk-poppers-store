@@ -27,13 +27,13 @@ const Navbar = () => {
             </ul>
           </div>
           <div className='flex items-center space-x-5'>
-            <a href='#'>
+            <a href='/profile'>
               <BiUserCircle
                 size={24}
                 className='text-gray-500 hover:text-pink-700'
               />
             </a>
-            <a href='#'>
+            <a href='/cart'>
               <BiBasket
                 size={24}
                 className='text-gray-500 hover:text-pink-700'
