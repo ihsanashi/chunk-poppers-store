@@ -15,3 +15,5 @@ const AboutPage = (props) => {
     </>
   );
 };
+
+export default AboutPage;
