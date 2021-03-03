@@ -4,6 +4,15 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+  AccordionItemState,
+} from 'react-accessible-accordion';
+import { BiChevronUp, BiChevronDown } from 'react-icons/bi';
 
 const SupportPage = (props) => {
   const { data } = props;
@@ -30,16 +39,58 @@ const SupportPage = (props) => {
             </p>
           </section>
           <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20'>
-            {supportEdges.map((item) => (
+            {supportEdges.map((item, index) => (
               <div
                 key={item.node._id}
                 role='button'
-                className='border border-gray-300 hover:border-fuchsiaRose-300 rounded-md text-center p-5'
+                onClick={() => setActiveCategory(index)}
+                className={`${
+                  activeCategory === index
+                    ? 'border-fuchsiaRose-500'
+                    : 'border-gray-300'
+                } border hover:border-fuchsiaRose-200 rounded-md text-center p-5`}
               >
                 <Img fixed={item.node.icon.asset.fixed} />
                 <h2>{item.node.categoryTitle}</h2>
               </div>
             ))}
+          </section>
+          <section className='max-w-2xl mx-auto my-20'>
+            <div className='mb-24'>
+              <h4 className='font-semibold text-2xl text-center mb-2'>
+                {supportEdges[activeCategory].node.categoryTitle}
+              </h4>
+              <p className='font-normal text-base text-gray-700 text-center'>
+                {supportEdges[activeCategory].node.categoryDescription}
+              </p>
+            </div>
+            <div>
+              {supportEdges[activeCategory].node.faq.map((item) => (
+                <Accordion key={item._key} allowZeroExpanded={true}>
+                  <AccordionItem>
+                    <AccordionItemHeading>
+                      <AccordionItemButton className='flex items-center justify-between'>
+                        <h6 className='text-lg font-medium text-gray-700'>
+                          {item.question}
+                        </h6>
+                        <AccordionItemState>
+                          {({ expanded }) =>
+                            expanded ? (
+                              <BiChevronUp size={20} color='#C1577E' />
+                            ) : (
+                              <BiChevronDown size={20} color='#C1577E' />
+                            )
+                          }
+                        </AccordionItemState>
+                      </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                      <p>{item.answer}</p>
+                    </AccordionItemPanel>
+                  </AccordionItem>
+                </Accordion>
+              ))}
+            </div>
           </section>
         </Container>
       </Layout>
@@ -65,6 +116,7 @@ export const query = graphql`
             }
           }
           faq {
+            _key
             question
             answer
           }
