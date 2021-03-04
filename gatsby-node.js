@@ -97,6 +97,45 @@ const createProductPages = async ({ graphql, actions }) => {
   });
 };
 
+const createLegalPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+
+  const result = await graphql(`
+    {
+      allSanityLegal {
+        edges {
+          node {
+            _id
+            pageName
+            documentTitle
+            slug {
+              current
+            }
+            content {
+              _rawChildren
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const legals = result.data.allSanityLegal.edges || [];
+  legals.forEach((edge) => {
+    const path = `/legal/${edge.node.slug.current}`;
+
+    createPage({
+      path,
+      component: require.resolve('./src/templates/legal.js'),
+      context: { slug: edge.node.slug.current },
+    });
+  });
+};
+
 exports.createPages = async (params) => {
-  await Promise.all([createCategoryPages(params), createProductPages(params)]);
+  await Promise.all([
+    createCategoryPages(params),
+    createProductPages(params),
+    createLegalPages(params),
+  ]);
 };
