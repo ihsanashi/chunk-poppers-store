@@ -3,7 +3,6 @@ import Img from 'gatsby-image';
 import Container from '../Container';
 
 const ContactInfo = ({ contactContent }) => {
-  console.log(contactContent);
   return (
     <Container>
       <section className='mb-20'>
