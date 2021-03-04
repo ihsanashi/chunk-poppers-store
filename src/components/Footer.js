@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery, Link } from 'gatsby';
 import Container from './Container';
-import Logo from '../images/cp-logo.png';
+import Logo from '../components/Logo';
 import { FaInstagram, FaFacebookSquare, FaRegEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
@@ -30,11 +30,7 @@ const Footer = () => {
             <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-6'>
               <div className='col-span-1 lg:col-span-2'>
                 <Link to='/'>
-                  <img
-                    src={Logo}
-                    className='h-12 w-12'
-                    alt='Chunk Poppers logo'
-                  />
+                  <Logo />
                 </Link>
                 <h6 className='font-normal text-sm text-gray-700 mt-8 mb-5'>
                   Varius in tempor ipsum, amet at sed elit massa proin. A
