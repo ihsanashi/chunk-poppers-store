@@ -2,7 +2,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { graphql, Link } from 'gatsby';
 import Logo from '../components/Logo';
-import dayjs from 'dayjs';
 import PortableText from '@sanity/block-content-to-react';
 
 const LegalPage = (props) => {
