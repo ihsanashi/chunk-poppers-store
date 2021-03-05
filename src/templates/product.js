@@ -14,11 +14,13 @@ import SingleProduct from '../components/product/Single';
 const ProductPage = (props) => {
   const { data, errors } = props;
   const product = (data || {}).product;
+  const productVariants = product.variants;
+  const lastVariant = productVariants[productVariants.length - 1];
   const categorySlug = product.category.slug.current;
   const similarItems = (data || {}).similarItems;
   const similarItemsEdges = similarItems.edges;
 
-  const [variantName, setVariantName] = useState('');
+  const [variantPrice, setVariantPrice] = useState(lastVariant.price);
   const [mainImageIndex, setMainImageIndex] = useState(0);
 
   const serializers = {
@@ -69,9 +71,14 @@ const ProductPage = (props) => {
               <div className='grid grid-cols-4 gap-4 mt-5'>
                 {product.media.map((item, index) => (
                   <figure
-                    className='cursor-pointer'
+                    role='button'
                     index={index}
                     key={item._key}
+                    className={
+                      mainImageIndex === index
+                        ? 'border-fuchsiaRose-400 border-2'
+                        : 'border-none'
+                    }
                     onClick={() => setMainImageIndex(index)}
                   >
                     <Img fluid={item.asset.fluid} alt={item.caption} />
@@ -79,103 +86,89 @@ const ProductPage = (props) => {
                 ))}
               </div>
             </div>
-            <div>
+            <main>
               <h2 className='font-semibold text-gray-900 text-2xl md:text-3xl lg:text-4xl'>
                 {product.title}
               </h2>
-              <div className='mt-5'>
-                <p className='text-sm text-gray-600 mb-3'>Select a variant:</p>
-                {product.variants.map((item) => (
-                  <div key={item._key} className='flex'>
-                    <input
-                      className='mr-2'
-                      type='radio'
-                      id={item.name}
-                      name='variant'
-                      value={item.price}
-                      onChange={() => setVariantName(item.price)}
-                    />
-                    <label htmlFor='variant'>{item.name}</label>
-                  </div>
-                ))}
-                <div className='flex items-center justify-between mt-8'>
-                  <h5 className='text-2xl text-gray-800 font-medium'>RM</h5>
-                  <h6 className='uppercase font-medium text-lg text-gray-700'>
-                    Quantity
-                  </h6>
-                </div>
-                <div className='flex items-center justify-between'>
-                  <h2 className='text-4xl lgtext-5xl font-bold text-gray-900'>
-                    {variantName ? variantName : ''}
-                  </h2>
-                </div>
-                <div className='flex my-7'>
-                  <button
-                    className={`text-white font-bold w-full py-2 px-4 rounded ${
-                      variantName
-                        ? 'bg-mountbattenPink-400 shadow-md hover:bg-mountbattenPink-500 hover:shadow-2xl'
-                        : 'bg-gray-300 cursor-not-allowed'
-                    }`}
-                    disabled={true}
-                  >
-                    {variantName
-                      ? `Add to cart — RM${variantName}`
-                      : 'Please select a variant'}
-                  </button>
+              <div className='mt-5 flex justify-between items-start'>
+                <div>
+                  <p className='text-sm text-gray-600 mb-3'>
+                    Select a variant:
+                  </p>
+                  {product.variants.map((item) => (
+                    <div key={item._key} className='flex'>
+                      <input
+                        className='mr-2'
+                        type='radio'
+                        id={item.name}
+                        name='variant'
+                        value={item.price}
+                        defaultChecked={item.price === variantPrice}
+                        onChange={() => setVariantPrice(item.price)}
+                      />
+                      <label htmlFor='variant'>{item.name}</label>
+                    </div>
+                  ))}
                 </div>
                 <div>
-                  <ProductAccordion>
-                    <ProductAccordionItem
-                      uuid='description'
-                      title='Description and details'
-                    >
-                      <PortableText
-                        blocks={product._rawDescription}
-                        serializers={serializers}
-                      />
-                    </ProductAccordionItem>
-                    <ProductAccordionItem
-                      uuid='ingredients'
-                      title='Ingredients'
-                    >
-                      <p>{product.ingredients}</p>
-                    </ProductAccordionItem>
-                    <ProductAccordionItem uuid='allergens' title='Allergens'>
-                      <p>{product.allergens}</p>
-                    </ProductAccordionItem>
-                    <ProductAccordionItem
-                      uuid='includedItems'
-                      title='Items included with this item'
-                    >
-                      <div className='grid grid-cols-2 gap-4'>
-                        {product.includedItems.map((item) => (
-                          <article key={item._id}>
-                            <Img
-                              fluid={item.image.asset.fluid}
-                              alt={item.image.caption}
-                            />
-                            <div>
-                              <h5 className='text-lg text-gray-600 mt-2 mb-1'>
-                                {item.title}
-                              </h5>
-                              <p className='text-sm text-gray-500'>
-                                {item.details}
-                              </p>
-                            </div>
-                          </article>
-                        ))}
-                      </div>
-                    </ProductAccordionItem>
-                    <ProductAccordionItem
-                      uuid='careInstructions'
-                      title='Care instructions'
-                    >
-                      <p>{product.careInstructions}</p>
-                    </ProductAccordionItem>
-                  </ProductAccordion>
+                  <h5 className='text-2xl text-gray-800 text-right font-medium'>
+                    {`RM${variantPrice ? variantPrice : ''}`}
+                  </h5>
                 </div>
               </div>
-            </div>
+              <div className='my-7'>
+                <button className='text-white font-bold w-full py-2 px-4 rounded bg-mountbattenPink-400 shadow-md hover:bg-mountbattenPink-500 hover:shadow-2xl'>
+                  {`Add to cart — RM${variantPrice}`}
+                </button>
+              </div>
+
+              <ProductAccordion>
+                <ProductAccordionItem
+                  uuid='description'
+                  title='Description and details'
+                >
+                  <PortableText
+                    blocks={product._rawDescription}
+                    serializers={serializers}
+                  />
+                </ProductAccordionItem>
+                <ProductAccordionItem uuid='ingredients' title='Ingredients'>
+                  <p>{product.ingredients}</p>
+                </ProductAccordionItem>
+                <ProductAccordionItem uuid='allergens' title='Allergens'>
+                  <p>{product.allergens}</p>
+                </ProductAccordionItem>
+                <ProductAccordionItem
+                  uuid='includedItems'
+                  title='Items included with this item'
+                >
+                  <div className='grid grid-cols-2 gap-4'>
+                    {product.includedItems.map((item) => (
+                      <article key={item._id}>
+                        <Img
+                          fluid={item.image.asset.fluid}
+                          alt={item.image.caption}
+                        />
+                        <div>
+                          <h5 className='text-lg text-gray-600 mt-2 mb-1'>
+                            {item.title}
+                          </h5>
+                          <p className='text-sm text-gray-500'>
+                            {item.details}
+                          </p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </ProductAccordionItem>
+                <ProductAccordionItem
+                  uuid='careInstructions'
+                  title='Care instructions'
+                >
+                  <p>{product.careInstructions}</p>
+                </ProductAccordionItem>
+              </ProductAccordion>
+            </main>
           </section>
           {/* product details */}
         </Container>
