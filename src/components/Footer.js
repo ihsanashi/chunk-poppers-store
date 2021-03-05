@@ -3,6 +3,7 @@ import { graphql, StaticQuery, Link } from 'gatsby';
 import Container from './Container';
 import Logo from '../components/Logo';
 import { FaInstagram, FaFacebookSquare, FaRegEnvelope } from 'react-icons/fa';
+import footer_links from '../data/footer_links';
 
 const Footer = () => {
   const date = new Date();
@@ -45,7 +46,12 @@ const Footer = () => {
                   Sitemap
                 </h5>
                 <ul className='list-none'>
-                  <li className='text-sm text-gray-600 my-5'>
+                  {footer_links.map((item) => (
+                    <li key={item.name} className='text-sm text-gray-600 my-5'>
+                      <Link to={item.link}>{item.name}</Link>
+                    </li>
+                  ))}
+                  {/* <li className='text-sm text-gray-600 my-5'>
                     <Link to='/'>Home</Link>
                   </li>
                   <li className='text-sm text-gray-600 my-5'>
@@ -59,7 +65,7 @@ const Footer = () => {
                   </li>
                   <li className='text-sm text-gray-600 my-5'>
                     <Link to='/contact'>Contact us</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className='col-span-1 lg:col-span-2'>
