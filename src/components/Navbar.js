@@ -6,7 +6,7 @@ import { BiUserCircle, BiBasket } from 'react-icons/bi';
 
 const Navbar = () => {
   return (
-    <header className='max-w-5xl mx-auto p-8'>
+    <header className='max-w-6xl mx-auto p-8'>
       <nav className=''>
         <div className='flex items-center'>
           <div className='flex-grow-0'>
