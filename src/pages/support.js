@@ -38,7 +38,7 @@ const SupportPage = (props) => {
               <strong className='text-gray-800'>please get in touch</strong>.
             </p>
           </section>
-          <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20'>
+          <section className='grid grid-cols-2 md:grid-cols-4 gap-4 mb-20'>
             {supportEdges.map((item, index) => (
               <div
                 key={item.node._id}
@@ -46,12 +46,14 @@ const SupportPage = (props) => {
                 onClick={() => setActiveCategory(index)}
                 className={`${
                   activeCategory === index
-                    ? 'border-fuchsiaRose-500'
+                    ? 'border-fuchsiaRose-500 bg-fuchsiaRose-50'
                     : 'border-gray-300'
                 } border hover:border-fuchsiaRose-200 rounded-md text-center p-5`}
               >
                 <Img fixed={item.node.icon.asset.fixed} />
-                <h2>{item.node.categoryTitle}</h2>
+                <h5 className='text-sm md:text-base font-medium text-gray-800'>
+                  {item.node.categoryTitle}
+                </h5>
               </div>
             ))}
           </section>
@@ -85,7 +87,9 @@ const SupportPage = (props) => {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <p>{item.answer}</p>
+                      <p className='text-sm md:text-base text-gray-700 font-normal'>
+                        {item.answer}
+                      </p>
                     </AccordionItemPanel>
                   </AccordionItem>
                 </Accordion>
