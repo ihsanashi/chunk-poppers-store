@@ -18,7 +18,7 @@ const AboutPage = (props) => {
         <Container>
           <main className='grid grid-cols-1 md:grid-cols-2 gap-4 text-center md:text-left my-20'>
             <div>
-              <h2 className='font-semibold text-gray-900 text-3xl md:text-4xl'>
+              <h2 className='font-semibold text-3xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-fuchsiaRose-300 to-pearlyPurple-500'>
                 {about.heroTitle}
               </h2>
             </div>
@@ -55,18 +55,23 @@ const AboutPage = (props) => {
               </p>
             </div>
           </section>
-          <section className='grid grid-cols-1 md:grid-cols-3 my-20'>
+          <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-20'>
             {about.features.map((item) => (
               <div
                 key={item._key}
-                className='bg-pearlyPurple-50 p-7 rounded-lg text-center'
+                className='bg-pearlyPurple-50 rounded-lg text-center relative flex flex-col items-center my-3 lg:my-0'
               >
-                <h6 className='text-lg text-gray-800 font-medium'>
-                  {item.title}
-                </h6>
-                <p className='mt-5 font-normal text-gray-600 text-base'>
-                  {item.description}
-                </p>
+                <div className='absolute mx-auto -top-6 w-12 h-12 p-3 bg-fuchsiaRose-400 rounded-lg'>
+                  <Img fixed={item.icon.asset.fixed} alt={item.icon.caption} />
+                </div>
+                <div className='p-7 mt-5'>
+                  <h6 className='text-lg text-gray-800 font-medium'>
+                    {item.title}
+                  </h6>
+                  <p className='mt-3 font-normal text-gray-600 text-base'>
+                    {item.description}
+                  </p>
+                </div>
               </div>
             ))}
           </section>
@@ -103,7 +108,9 @@ export const query = graphql`
         icon {
           caption
           asset {
-            path
+            fixed(height: 24, width: 24) {
+              ...GatsbySanityImageFixed
+            }
           }
         }
       }
