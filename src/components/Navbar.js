@@ -17,11 +17,14 @@ const Navbar = () => {
           <div className='mx-auto'>
             <ul className='flex flex-row items-center'>
               {nav_links.map((item) => (
-                <li
-                  key={item.name}
-                  className='px-5 text-gray-500 hover:text-purple-700'
-                >
-                  <Link to={item.link}>{item.name}</Link>
+                <li key={item.name}>
+                  <Link
+                    to={item.link}
+                    activeClassName='text-purple-500'
+                    className='px-5 text-gray-500 hover:text-purple-700'
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
