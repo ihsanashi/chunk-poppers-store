@@ -23,7 +23,6 @@ const ContactPage = (props) => {
             />
           </section>
         </main>
-        z
         <Container>
           <section className='mb-20'>
             <div className='max-w-md mx-auto text-center mb-12'>
