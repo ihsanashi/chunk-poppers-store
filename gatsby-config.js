@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
   siteMetadata: {
     title: 'Chunk Poppers store',
-    description: '',
+    description:
+      'Online store for Chunk Poppers, featuring beautifully designed desserts.',
     author: 'Ahmad Ihsan',
     siteUrl: 'https://chunkpoppers.netlify.app/',
   },
@@ -32,12 +33,25 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`mukta\:200,300,400,500,600,700,800`],
+        display: 'swap',
+      },
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
         path: path.join(__dirname, 'src', 'images'),
       },
       __key: 'images',
+    },
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: `1361841393`,
+      },
     },
   ],
 };
