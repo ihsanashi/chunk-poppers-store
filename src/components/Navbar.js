@@ -25,7 +25,7 @@ const Navbar = () => {
   }, [width]);
 
   return (
-    <header className='max-w-6xl mx-auto p-4 lg:p-8'>
+    <header className='max-w-6xl mx-auto p-3 lg:p-8'>
       <nav className='flex items-center justify-between'>
         <div className='order-2 lg:order-first lg:flex-grow-0'>
           <Link to='/'>
@@ -54,7 +54,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className='flex items-center space-x-5 order-last'>
+        <div className='flex items-center space-x-3 lg:space-x-5 order-last'>
           <a href='/profile'>
             <BiUserCircle
               size={24}
