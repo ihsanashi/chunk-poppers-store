@@ -48,6 +48,25 @@ module.exports = {
       __key: 'images',
     },
     {
+      resolve: `gatsby-plugin-snipcart-advanced`,
+      options: {
+        version: '3.0.29',
+        publicApiKey: `${process.env.GATSBY_SNIPCART_API_KEY}`,
+        defaultLang: 'en',
+        currency: 'myr',
+        openCartOnAdd: false,
+        useSideCart: true,
+        // be careful with this mode cart. The cart in this mode has a bug of scroll in firefox
+        locales: {
+          fr: {
+            actions: {
+              checkout: 'Valider le panier',
+            },
+          },
+        },
+      },
+    },
+    {
       resolve: `gatsby-source-instagram`,
       options: {
         username: `1361841393`,
