@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'gatsby';
 import nav_links from '../data/nav_links';
 import Logo from './Logo';
 import { BiUserCircle, BiBasket, BiMenu, BiX } from 'react-icons/bi';
 
+import { SnipcartContext } from 'gatsby-plugin-snipcart-advanced/context';
+
 const Navbar = () => {
   const [width, setWidth] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
+
+  const { state } = useContext(SnipcartContext);
+  const { userStatus, cartQuantity } = state;
 
   const updateWidth = () => {
     setWidth(window.innerWidth);
@@ -61,9 +66,10 @@ const Navbar = () => {
               className='text-gray-500 hover:text-pink-700'
             />
           </a>
-          <a href='/cart'>
+          <button className='snipcart-checkout flex'>
             <BiBasket size={24} className='text-gray-500 hover:text-pink-700' />
-          </a>
+            <span className='ml-2'>{cartQuantity}</span>
+          </button>
         </div>
         <button
           className={`block lg:hidden z-20 text-4xl ${
