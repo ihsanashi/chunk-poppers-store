@@ -55,8 +55,7 @@ module.exports = {
         defaultLang: 'en',
         currency: 'myr',
         openCartOnAdd: false,
-        useSideCart: true,
-        // be careful with this mode cart. The cart in this mode has a bug of scroll in firefox
+        useSideCart: false,
         locales: {
           fr: {
             actions: {

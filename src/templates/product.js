@@ -10,6 +10,7 @@ import ProductAccordionItem from '../components/product/AccordionItem';
 
 import '../styles/accordion.css';
 import SingleProduct from '../components/product/Single';
+import AddToCartButton from '../components/product/AddToCartButton';
 
 const ProductPage = (props) => {
   const { data, errors } = props;
@@ -19,6 +20,7 @@ const ProductPage = (props) => {
   const categorySlug = product.category.slug.current;
   const similarItems = (data || {}).similarItems;
   const similarItemsEdges = similarItems.edges;
+  const productSlug = `/shop/category/${categorySlug}/${product.slug.current}`;
 
   const [variantPrice, setVariantPrice] = useState(lastVariant.price);
   const [mainImageIndex, setMainImageIndex] = useState(0);
@@ -117,9 +119,15 @@ const ProductPage = (props) => {
                 </div>
               </div>
               <div className='my-7'>
-                <button className='text-white font-bold w-full py-2 px-4 rounded bg-mountbattenPink-400 shadow-md hover:bg-mountbattenPink-500 hover:shadow-2xl'>
-                  {`Add to cart — RM${variantPrice}`}
-                </button>
+                <AddToCartButton
+                  _id={product._id}
+                  title={product.title}
+                  buttonText={variantPrice}
+                  variantPrice={variantPrice}
+                  image={product.media[0].asset.url}
+                  slug={productSlug}
+                  excerpt={product.excerpt}
+                />
               </div>
 
               <ProductAccordion>
@@ -222,6 +230,7 @@ export const query = graphql`
           current
         }
       }
+      excerpt
       _rawDescription
       slug {
         current
@@ -235,6 +244,7 @@ export const query = graphql`
         _key
         caption
         asset {
+          url
           fluid(maxWidth: 600, maxHeight: 600) {
             ...GatsbySanityImageFluid
           }
