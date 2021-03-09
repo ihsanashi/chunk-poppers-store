@@ -51,23 +51,29 @@ const createProductPages = async ({ graphql, actions }) => {
                 current
               }
             }
-            description {
-              children {
-                text
-              }
-            }
             slug {
               current
             }
             variants {
-              name
-              price
+              ... on SanityQuantity {
+                _key
+                _type
+                title
+                priceDifferential
+              }
+              ... on SanitySize {
+                _key
+                _type
+                priceDifferential
+                title
+              }
             }
             media {
               asset {
                 url
               }
             }
+            description
             ingredients
             includedItems {
               details

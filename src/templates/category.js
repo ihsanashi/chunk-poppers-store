@@ -36,7 +36,7 @@ const CategoryPage = (props) => {
                 _id={item._id}
                 imageSrc={item.media[0].asset.fluid}
                 title={item.title}
-                lowestPrice={item.variants[0].price}
+                basePrice={item.basePrice}
               />
             ))}
           </section>
@@ -62,8 +62,20 @@ export const query = graphql`
       products {
         _id
         title
+        basePrice
         variants {
-          price
+          ... on SanityQuantity {
+            _key
+            _type
+            priceDifferential
+            title
+          }
+          ... on SanitySize {
+            _key
+            _type
+            priceDifferential
+            title
+          }
         }
         slug {
           current

@@ -4,7 +4,6 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import PortableText from '@sanity/block-content-to-react';
 import ProductAccordion from '../components/product/Accordion';
 import ProductAccordionItem from '../components/product/AccordionItem';
 
@@ -16,21 +15,16 @@ const ProductPage = (props) => {
   const { data, errors } = props;
   const product = (data || {}).product;
   const productVariants = product.variants;
-  const lastVariant = productVariants[productVariants.length - 1];
+  const variantTypeTitle = productVariants[0]._type;
+  let variantOptions = [];
+
   const categorySlug = product.category.slug.current;
   const similarItems = (data || {}).similarItems;
   const similarItemsEdges = similarItems.edges;
   const productSlug = `/shop/category/${categorySlug}/${product.slug.current}`;
 
-  const [variantPrice, setVariantPrice] = useState(lastVariant.price);
   const [mainImageIndex, setMainImageIndex] = useState(0);
-
-  const serializers = {
-    types: {
-      span: (props) => <span>{props}</span>,
-      h1: (props) => <h1 className='hello'>{props}</h1>,
-    },
-  };
+  const [displayPrice, setDisplayPrice] = useState(0);
 
   return (
     <>
@@ -95,26 +89,26 @@ const ProductPage = (props) => {
               <div className='mt-5 flex justify-between items-start'>
                 <div>
                   <p className='text-sm text-gray-600 mb-3'>
-                    Select a variant:
+                    {`Select a ${variantTypeTitle}:`}
                   </p>
                   {product.variants.map((item) => (
                     <div key={item._key} className='flex'>
                       <input
                         className='mr-2'
                         type='radio'
-                        id={item.name}
-                        name='variant'
-                        value={item.price}
-                        defaultChecked={item.price === variantPrice}
-                        onChange={() => setVariantPrice(item.price)}
+                        id={item.title}
+                        name={variantTypeTitle}
+                        value={item.priceDifferential}
+                        defaultChecked={item.priceDifferential === 0}
+                        onChange={() => setDisplayPrice(item.priceDifferential)}
                       />
-                      <label htmlFor='variant'>{item.name}</label>
+                      <label htmlFor={variantTypeTitle}>{item.title}</label>
                     </div>
                   ))}
                 </div>
                 <div>
                   <h5 className='text-2xl text-gray-800 text-right font-medium'>
-                    {`RM${variantPrice ? variantPrice : ''}`}
+                    {`RM${displayPrice + product.basePrice}`}
                   </h5>
                 </div>
               </div>
@@ -122,11 +116,13 @@ const ProductPage = (props) => {
                 <AddToCartButton
                   _id={product._id}
                   title={product.title}
-                  buttonText={variantPrice}
-                  variantPrice={variantPrice}
+                  basePrice={product.basePrice}
+                  buttonText={displayPrice + product.basePrice}
                   image={product.media[0].asset.url}
                   slug={productSlug}
-                  excerpt={product.excerpt}
+                  description={product.description}
+                  variantType={variantTypeTitle}
+                  variantOptions={``}
                 />
               </div>
 
@@ -135,10 +131,7 @@ const ProductPage = (props) => {
                   uuid='description'
                   title='Description and details'
                 >
-                  <PortableText
-                    blocks={product._rawDescription}
-                    serializers={serializers}
-                  />
+                  <p>{product.description}</p>
                 </ProductAccordionItem>
                 <ProductAccordionItem uuid='ingredients' title='Ingredients'>
                   <p>{product.ingredients}</p>
@@ -197,7 +190,7 @@ const ProductPage = (props) => {
                   _id={item.node._id}
                   imageSrc={item.node.media[0].asset.fluid}
                   title={item.node.title}
-                  lowestPrice={item.node.variants[0].price}
+                  basePrice={item.node.basePrice}
                 />
               ))}
             </div>
@@ -224,21 +217,29 @@ export const query = graphql`
     ) {
       _id
       title
+      basePrice
       category {
         title
         slug {
           current
         }
       }
-      excerpt
-      _rawDescription
       slug {
         current
       }
       variants {
-        _key
-        name
-        price
+        ... on SanityQuantity {
+          _key
+          _type
+          priceDifferential
+          title
+        }
+        ... on SanitySize {
+          _key
+          _type
+          priceDifferential
+          title
+        }
       }
       media {
         _key
@@ -250,6 +251,7 @@ export const query = graphql`
           }
         }
       }
+      description
       ingredients
       careInstructions
       allergens
@@ -280,11 +282,7 @@ export const query = graphql`
         node {
           _id
           title
-          variants {
-            name
-            price
-            _key
-          }
+          basePrice
           slug {
             current
           }

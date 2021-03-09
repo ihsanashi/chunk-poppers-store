@@ -17,7 +17,7 @@ const FeaturedProducts = ({ homeContent }) => {
               _id={item._id}
               imageSrc={item.media[0].asset.fluid}
               title={item.title}
-              lowestPrice={item.variants[0].price}
+              basePrice={item.basePrice}
             />
           ))}
         </div>

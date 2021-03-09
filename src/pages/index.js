@@ -26,7 +26,7 @@ const IndexPage = (props) => {
 export default IndexPage;
 
 export const query = graphql`
-  query {
+  {
     sanityHome {
       title
       heroImage {
@@ -56,6 +56,7 @@ export const query = graphql`
       featuredProducts {
         _id
         title
+        basePrice
         category {
           slug {
             current
@@ -66,7 +67,18 @@ export const query = graphql`
         }
         title
         variants {
-          price
+          ... on SanityQuantity {
+            _key
+            _type
+            priceDifferential
+            title
+          }
+          ... on SanitySize {
+            _key
+            _type
+            priceDifferential
+            title
+          }
         }
         media {
           asset {
