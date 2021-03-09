@@ -60,19 +60,24 @@ const Navbar = () => {
           ))}
         </ul>
         <div className='flex items-center space-x-3 lg:space-x-5 order-last'>
-          <a href='/profile'>
+          <button className='snipcart-customer-signin'>
             <BiUserCircle
               size={24}
-              className='text-gray-500 hover:text-pink-700'
+              className='text-gray-500 hover:text-fuchsiaRose-500'
             />
-          </a>
-          <button className='snipcart-checkout flex'>
-            <BiBasket size={24} className='text-gray-500 hover:text-pink-700' />
-            <span className='ml-2'>{cartQuantity}</span>
+          </button>
+          <button className='snipcart-checkout flex items-center group'>
+            <BiBasket
+              size={24}
+              className='text-gray-500 group-hover:text-fuchsiaRose-500'
+            />
+            <span className='ml-2 text-gray-500 group-hover:text-fuchsiaRose-500'>
+              {cartQuantity}
+            </span>
           </button>
         </div>
         <button
-          className={`block lg:hidden z-20 text-4xl ${
+          className={`block lg:hidden z-10 text-4xl ${
             showMenu ? 'text-mountbattenPink-500' : 'text-black'
           }`}
           onClick={() => setShowMenu(!showMenu)}
