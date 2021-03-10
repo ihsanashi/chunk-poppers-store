@@ -40,9 +40,8 @@ const SupportPage = (props) => {
           </section>
           <section className='grid grid-cols-2 md:grid-cols-4 gap-4 mb-20'>
             {supportEdges.map((item, index) => (
-              <div
+              <button
                 key={item.node._id}
-                role='button'
                 onClick={() => setActiveCategory(index)}
                 className={`${
                   activeCategory === index
@@ -54,7 +53,7 @@ const SupportPage = (props) => {
                 <h5 className='text-sm md:text-base font-medium text-gray-800'>
                   {item.node.categoryTitle}
                 </h5>
-              </div>
+              </button>
             ))}
           </section>
           <section className='max-w-2xl mx-auto my-20'>
