@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import Container from '../components/Container';
 import ProductAccordion from '../components/product/Accordion';
 import ProductAccordionItem from '../components/product/AccordionItem';
+import GraphQLErrorList from '../components/graphql-error-list';
 
 import '../styles/accordion.css';
 import SingleProduct from '../components/product/Single';
@@ -13,6 +14,7 @@ import AddToCartButton from '../components/product/AddToCartButton';
 
 const ProductPage = (props) => {
   const { data, errors } = props;
+
   const product = (data || {}).product;
   const productVariants = product.variants;
   const variantTypeTitle = productVariants[0]._type;
@@ -33,6 +35,14 @@ const ProductPage = (props) => {
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [variantTitle, setVariantTitle] = useState(productVariants[0].title);
   const [displayPrice, setDisplayPrice] = useState(product.basePrice);
+
+  if (errors) {
+    return (
+      <Layout>
+        <GraphQLErrorList errors={errors} />
+      </Layout>
+    );
+  }
 
   return (
     <>
@@ -74,8 +84,7 @@ const ProductPage = (props) => {
               />
               <div className='grid grid-cols-4 gap-4 mt-5'>
                 {product.media.map((item, index) => (
-                  <figure
-                    role='button'
+                  <button
                     index={index}
                     key={item._key}
                     className={
@@ -86,7 +95,7 @@ const ProductPage = (props) => {
                     onClick={() => setMainImageIndex(index)}
                   >
                     <Img fluid={item.asset.fluid} alt={item.caption} />
-                  </figure>
+                  </button>
                 ))}
               </div>
             </div>
