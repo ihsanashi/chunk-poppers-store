@@ -16,7 +16,14 @@ const ProductPage = (props) => {
   const product = (data || {}).product;
   const productVariants = product.variants;
   const variantTypeTitle = productVariants[0]._type;
+
   let variantOptions = [];
+  // let variantOptionsString = '';
+  productVariants.forEach((item, index) => {
+    let singleVariant = `${item.title}[${item.priceDifferential}]`;
+    variantOptions.push(singleVariant);
+  });
+  variantOptionsString = variantOptions.join('|');
 
   const categorySlug = product.category.slug.current;
   const similarItems = (data || {}).similarItems;
@@ -24,7 +31,8 @@ const ProductPage = (props) => {
   const productSlug = `/shop/category/${categorySlug}/${product.slug.current}`;
 
   const [mainImageIndex, setMainImageIndex] = useState(0);
-  const [displayPrice, setDisplayPrice] = useState(0);
+  const [variantTitle, setVariantTitle] = useState(productVariants[0].title);
+  const [displayPrice, setDisplayPrice] = useState(product.basePrice);
 
   return (
     <>
@@ -100,7 +108,12 @@ const ProductPage = (props) => {
                         name={variantTypeTitle}
                         value={item.priceDifferential}
                         defaultChecked={item.priceDifferential === 0}
-                        onChange={() => setDisplayPrice(item.priceDifferential)}
+                        onChange={() => {
+                          setDisplayPrice(
+                            product.basePrice + item.priceDifferential
+                          );
+                          setVariantTitle(item.title);
+                        }}
                       />
                       <label htmlFor={variantTypeTitle}>{item.title}</label>
                     </div>
@@ -108,21 +121,20 @@ const ProductPage = (props) => {
                 </div>
                 <div>
                   <h5 className='text-2xl text-gray-800 text-right font-medium'>
-                    {`RM${displayPrice + product.basePrice}`}
+                    {`RM${displayPrice}`}
                   </h5>
                 </div>
               </div>
               <div className='my-7'>
                 <AddToCartButton
-                  _id={product._id}
-                  title={product.title}
-                  basePrice={product.basePrice}
-                  buttonText={displayPrice + product.basePrice}
+                  _id={`${product._id}-${variantTitle}`}
+                  title={`${product.title} - ${variantTitle}`}
+                  price={displayPrice}
                   image={product.media[0].asset.url}
                   slug={productSlug}
                   description={product.description}
-                  variantType={variantTypeTitle}
-                  variantOptions={``}
+                  // variantType={variantTypeTitle}
+                  // variantOptions={variantOptionsString}
                 />
               </div>
 
