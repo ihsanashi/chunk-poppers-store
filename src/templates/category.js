@@ -4,11 +4,20 @@ import { graphql, Link } from 'gatsby';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import SingleProduct from '../components/product/Single';
+import GraphQLErrorList from '../components/graphql-error-list';
 
 const CategoryPage = (props) => {
   const { data, errors } = props;
   const category = data && data.category;
   const categorySlug = category.slug.current;
+
+  if (errors) {
+    return (
+      <Layout>
+        <GraphQLErrorList errors={errors} />
+      </Layout>
+    );
+  }
 
   return (
     <>
