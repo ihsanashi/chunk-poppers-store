@@ -11,7 +11,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const { state } = useContext(SnipcartContext);
-  const { userStatus, cartQuantity } = state;
+  const { cartQuantity } = state;
 
   const updateWidth = () => {
     setWidth(window.innerWidth);
@@ -27,7 +27,7 @@ const Navbar = () => {
       }
       return () => window.removeEventListener('resize', updateWidth);
     }
-  }, [width]);
+  }, [showMenu, width]);
 
   return (
     <header className='max-w-6xl mx-auto p-3 lg:p-8'>
