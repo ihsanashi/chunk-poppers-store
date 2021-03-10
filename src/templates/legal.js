@@ -2,7 +2,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { graphql, Link } from 'gatsby';
 import Logo from '../components/Logo';
+import Layout from '../components/Layout';
 import PortableText from '@sanity/block-content-to-react';
+import GraphQLErrorList from '../components/graphql-error-list';
 
 const LegalPage = (props) => {
   const { data, errors } = props;
@@ -17,6 +19,14 @@ const LegalPage = (props) => {
       h1: (props) => <h1 className='hello'>{props}</h1>,
     },
   };
+
+  if (errors) {
+    return (
+      <Layout>
+        <GraphQLErrorList errors={errors} />
+      </Layout>
+    );
+  }
 
   return (
     <>
