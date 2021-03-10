@@ -10,6 +10,7 @@ const AddToCartButton = (props) => {
     image,
     variantType,
     variantOptions,
+    variantTitle,
   } = props;
 
   return (
@@ -22,8 +23,14 @@ const AddToCartButton = (props) => {
       data-item-image={image && image}
       data-item-name={title}
       data-item-quantity='1'
-      // data-item-custom1-name={variantType}
-      // data-item-custom1-options={variantOptions}
+      data-item-max-quantity='8'
+      data-item-custom1-name={variantType}
+      data-item-custom1-options={variantOptions}
+      data-item-custom1-value={variantTitle}
+      data-item-custom2-name='Gift'
+      data-item-custom2-type='checkbox'
+      data-item-custom3-name='Gift note or message (optional)'
+      data-item-custom3-type='textarea'
     >{`Add to cart - RM${price}`}</button>
   );
 };

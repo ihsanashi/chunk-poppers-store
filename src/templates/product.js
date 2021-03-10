@@ -20,7 +20,7 @@ const ProductPage = (props) => {
   let variantOptions = [];
   let variantOptionsString = '';
   productVariants.forEach((item, index) => {
-    let singleVariant = `${item.title}[${item.priceDifferential}]`;
+    let singleVariant = `${item.title}[+${item.priceDifferential}]`;
     variantOptions.push(singleVariant);
   });
   variantOptionsString = variantOptions.join('|');
@@ -128,13 +128,14 @@ const ProductPage = (props) => {
               <div className='my-7'>
                 <AddToCartButton
                   _id={`${product._id}-${variantTitle}`}
-                  title={`${product.title} - ${variantTitle}`}
-                  price={displayPrice}
+                  title={product.title}
+                  price={product.basePrice}
                   image={product.media[0].asset.url}
                   slug={productSlug}
                   description={product.description}
-                  // variantType={variantTypeTitle}
-                  // variantOptions={variantOptionsString}
+                  variantType={variantTypeTitle}
+                  variantOptions={variantOptionsString}
+                  variantTitle={variantTitle}
                 />
               </div>
 
