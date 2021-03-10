@@ -18,7 +18,7 @@ const ProductPage = (props) => {
   const variantTypeTitle = productVariants[0]._type;
 
   let variantOptions = [];
-  // let variantOptionsString = '';
+  let variantOptionsString = '';
   productVariants.forEach((item, index) => {
     let singleVariant = `${item.title}[${item.priceDifferential}]`;
     variantOptions.push(singleVariant);
