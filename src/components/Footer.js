@@ -51,21 +51,6 @@ const Footer = () => {
                       <Link to={item.link}>{item.name}</Link>
                     </li>
                   ))}
-                  {/* <li className='text-sm text-gray-600 my-5'>
-                    <Link to='/'>Home</Link>
-                  </li>
-                  <li className='text-sm text-gray-600 my-5'>
-                    <Link to='/shop'>Shop</Link>
-                  </li>
-                  <li className='text-sm text-gray-600 my-5'>
-                    <Link to='/'>Services</Link>
-                  </li>
-                  <li className='text-sm text-gray-600 my-5'>
-                    <Link to='/about'>About us</Link>
-                  </li>
-                  <li className='text-sm text-gray-600 my-5'>
-                    <Link to='/contact'>Contact us</Link>
-                  </li> */}
                 </ul>
               </div>
               <div className='col-span-1 lg:col-span-2'>
@@ -83,7 +68,7 @@ const Footer = () => {
               <div className='flex flex-row items-center'>
                 <a
                   className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
-                  href='https://instagram.com'
+                  href='https://www.instagram.com/chunkpoppers/'
                   target='_blank'
                   rel='noreferrer'
                 >
@@ -91,7 +76,7 @@ const Footer = () => {
                 </a>
                 <a
                   className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
-                  href='https://facebook.com'
+                  href='https://www.facebook.com/ChunkPoppers/'
                   target='_blank'
                   rel='noreferrer'
                 >
