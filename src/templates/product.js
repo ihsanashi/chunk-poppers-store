@@ -54,20 +54,20 @@ const ProductPage = (props) => {
       <Layout>
         <Container>
           {/* breadcrumbs */}
-          <section className='mb-8'>
-            <div className='inline'>
-              <small>
+          <section className='my-8 text-sm md:text-base'>
+            <div className='inline text-gray-600 hover:text-fuchsiaRose-500'>
+              <p className='inline text-gray-600 hover:text-fuchsiaRose-500'>
                 <Link to='/'>Home / </Link>
-              </small>
-              <small>
+              </p>
+              <p className='inline text-gray-600 hover:text-fuchsiaRose-500'>
                 <Link to='/shop'>Shop / </Link>
-              </small>
-              <small>
+              </p>
+              <p className='inline text-gray-600 hover:text-fuchsiaRose-500'>
                 <Link to={`/shop/category/${categorySlug}`}>
                   {product.category.title} /
                 </Link>
-              </small>
-              <small className='text-gray-600'> {product.title}</small>
+              </p>
+              <p className='text-gray-800 inline'> {product.title}</p>
             </div>
           </section>
           {/* breadcrumbs */}
@@ -82,7 +82,7 @@ const ProductPage = (props) => {
                 fluid={product.media[mainImageIndex].asset.fluid}
                 alt={product.media[mainImageIndex].caption}
               />
-              <div className='grid grid-cols-4 gap-4 mt-5'>
+              <div className='grid grid-cols-4 gap-4 mt-3 md:mt-5'>
                 {product.media.map((item, index) => (
                   <button
                     index={index}
@@ -105,7 +105,7 @@ const ProductPage = (props) => {
               </h2>
               <div className='mt-5 flex justify-between items-start'>
                 <div>
-                  <p className='text-sm text-gray-600 mb-3'>
+                  <p className='text-sm md:text-base text-gray-600 mb-3'>
                     {`Select a ${variantTypeTitle}:`}
                   </p>
                   {product.variants.map((item) => (
@@ -124,7 +124,9 @@ const ProductPage = (props) => {
                           setVariantTitle(item.title);
                         }}
                       />
-                      <label htmlFor={variantTypeTitle}>{item.title}</label>
+                      <label className='text-base' htmlFor={variantTypeTitle}>
+                        {item.title}
+                      </label>
                     </div>
                   ))}
                 </div>
@@ -134,7 +136,7 @@ const ProductPage = (props) => {
                   </h5>
                 </div>
               </div>
-              <div className='my-7'>
+              <div className='md:my-7 p-4 md:p-0 z-10 md:z-auto fixed bottom-0 left-0 w-full md:static'>
                 <AddToCartButton
                   _id={`${product._id}-${variantTitle}`}
                   title={product.title}
