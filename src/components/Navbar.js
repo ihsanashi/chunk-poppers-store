@@ -59,19 +59,19 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className='flex items-center space-x-3 lg:space-x-5 order-last'>
+        <div className='flex items-center order-last'>
           <button className='snipcart-customer-signin'>
             <BiUserCircle
               size={24}
               className='text-gray-500 hover:text-fuchsiaRose-500'
             />
           </button>
-          <button className='snipcart-checkout flex items-center group'>
+          <button className='snipcart-checkout flex items-center group pl-2 md:pl-4'>
             <BiBasket
               size={24}
               className='text-gray-500 group-hover:text-fuchsiaRose-500'
             />
-            <span className='ml-2 text-gray-500 group-hover:text-fuchsiaRose-500'>
+            <span className='pl-1 md:pl-2 text-gray-500 group-hover:text-fuchsiaRose-500'>
               {cartQuantity}
             </span>
           </button>
