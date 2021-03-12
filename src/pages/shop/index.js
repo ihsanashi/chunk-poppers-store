@@ -64,12 +64,6 @@ export const query = graphql`
           _id
           title
           description
-          backgroundColorLight {
-            hex
-          }
-          buttonBackgroundLight {
-            hex
-          }
           slug {
             current
           }
