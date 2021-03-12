@@ -55,17 +55,26 @@ const ProductPage = (props) => {
         <Container>
           {/* breadcrumbs */}
           <section className='my-8 text-sm md:text-base'>
-            <div className='inline text-gray-600 hover:text-fuchsiaRose-500'>
-              <p className='inline text-gray-600 hover:text-fuchsiaRose-500'>
-                <Link to='/'>Home / </Link>
+            <div className='inline'>
+              <p className='inline text-gray-500 hover:text-fuchsiaRose-500'>
+                <Link to='/'>Home</Link>
               </p>
-              <p className='inline text-gray-600 hover:text-fuchsiaRose-500'>
-                <Link to='/shop'>Shop / </Link>
+              <p className='inline text-gray-500'>
+                {'  '}/{'  '}
               </p>
-              <p className='inline text-gray-600 hover:text-fuchsiaRose-500'>
+              <p className='inline text-gray-500 hover:text-fuchsiaRose-500'>
+                <Link to='/shop'>Shop</Link>
+              </p>
+              <p className='inline text-gray-500'>
+                {'  '}/{'  '}
+              </p>
+              <p className='inline text-gray-500 hover:text-fuchsiaRose-500'>
                 <Link to={`/shop/category/${categorySlug}`}>
-                  {product.category.title} /
+                  {product.category.title}
                 </Link>
+              </p>
+              <p className='inline text-gray-500'>
+                {'  '}/{'  '}
               </p>
               <p className='text-gray-800 inline'> {product.title}</p>
             </div>
@@ -108,7 +117,7 @@ const ProductPage = (props) => {
                   <p className='text-sm md:text-base text-gray-600 mb-3'>
                     {`Select a ${variantTypeTitle}:`}
                   </p>
-                  {product.variants.map((item) => (
+                  {productVariants.map((item, index) => (
                     <div key={item._key} className='flex'>
                       <input
                         className='mr-2'
@@ -116,7 +125,7 @@ const ProductPage = (props) => {
                         id={item.title}
                         name={variantTypeTitle}
                         value={item.priceDifferential}
-                        defaultChecked={item.priceDifferential === 0}
+                        defaultChecked={index === 0}
                         onChange={() => {
                           setDisplayPrice(
                             product.basePrice + item.priceDifferential
@@ -136,7 +145,7 @@ const ProductPage = (props) => {
                   </h5>
                 </div>
               </div>
-              <div className='md:my-7 p-4 md:p-0 z-10 md:z-auto fixed bottom-0 left-0 w-full md:static'>
+              <div className='my-7'>
                 <AddToCartButton
                   _id={`${product._id}-${variantTitle}`}
                   title={product.title}
@@ -157,41 +166,49 @@ const ProductPage = (props) => {
                 >
                   <p>{product.description}</p>
                 </ProductAccordionItem>
-                <ProductAccordionItem uuid='ingredients' title='Ingredients'>
-                  <p>{product.ingredients}</p>
-                </ProductAccordionItem>
-                <ProductAccordionItem uuid='allergens' title='Allergens'>
-                  <p>{product.allergens}</p>
-                </ProductAccordionItem>
-                <ProductAccordionItem
-                  uuid='includedItems'
-                  title='Items included with this item'
-                >
-                  <div className='grid grid-cols-2 gap-4'>
-                    {product.includedItems.map((item) => (
-                      <article key={item._id}>
-                        <Img
-                          fluid={item.image.asset.fluid}
-                          alt={item.image.caption}
-                        />
-                        <div>
-                          <h5 className='text-lg text-gray-600 mt-2 mb-1'>
-                            {item.title}
-                          </h5>
-                          <p className='text-sm text-gray-500'>
-                            {item.details}
-                          </p>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </ProductAccordionItem>
-                <ProductAccordionItem
-                  uuid='careInstructions'
-                  title='Care instructions'
-                >
-                  <p>{product.careInstructions}</p>
-                </ProductAccordionItem>
+                {product.ingredients && (
+                  <ProductAccordionItem uuid='ingredients' title='Ingredients'>
+                    <p>{product.ingredients}</p>
+                  </ProductAccordionItem>
+                )}
+                {product.allergens && (
+                  <ProductAccordionItem uuid='allergens' title='Allergens'>
+                    <p>{product.allergens}</p>
+                  </ProductAccordionItem>
+                )}
+                {product.careInstructions && (
+                  <ProductAccordionItem
+                    uuid='careInstructions'
+                    title='Care instructions'
+                  >
+                    <p>{product.careInstructions}</p>
+                  </ProductAccordionItem>
+                )}
+                {product.includedItems.length !== 0 && (
+                  <ProductAccordionItem
+                    uuid='includedItems'
+                    title='Items included with this item'
+                  >
+                    <div className='grid grid-cols-2 gap-4'>
+                      {product.includedItems.map((item) => (
+                        <article key={item._id}>
+                          <Img
+                            fluid={item.image.asset.fluid}
+                            alt={item.image.caption}
+                          />
+                          <div>
+                            <h5 className='text-lg text-gray-600 mt-2 mb-1'>
+                              {item.title}
+                            </h5>
+                            <p className='text-sm text-gray-500'>
+                              {item.details}
+                            </p>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </ProductAccordionItem>
+                )}
               </ProductAccordion>
             </main>
           </section>
@@ -252,6 +269,12 @@ export const query = graphql`
         current
       }
       variants {
+        ... on SanityColor {
+          _key
+          _type
+          priceDifferential
+          title
+        }
         ... on SanityQuantity {
           _key
           _type
