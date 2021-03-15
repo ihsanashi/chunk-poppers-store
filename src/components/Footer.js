@@ -33,7 +33,7 @@ const Footer = () => {
                 <Link to='/'>
                   <Logo />
                 </Link>
-                <h6 className='font-normal text-sm text-gray-700 mt-8 mb-5'>
+                <h6 className='font-normal text-base text-gray-700 mt-8 mb-5'>
                   Varius in tempor ipsum, amet at sed elit massa proin. A
                   sagittis, eget malesuada dui.
                 </h6>
@@ -57,9 +57,17 @@ const Footer = () => {
                 <h5 className='uppercase font-medium text-sm tracking-wide'>
                   Newsletter
                 </h5>
-                <p className='text-sm text-gray-600 my-5'>
+                <p className='text-base text-gray-600 my-5'>
                   Be the first to know about our promotions!
                 </p>
+                <input
+                  type='email'
+                  placeholder='siti@example.com'
+                  class='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                />
+                <button className='w-full mx-auto mt-2 px-4 py-2 block text-center rounded-md text-white bg-fuchsiaRose-500'>
+                  Subscribe
+                </button>
               </div>
               <h2>Hello</h2>
             </section>
