@@ -12,16 +12,20 @@ import '../styles/accordion.css';
 import SingleProduct from '../components/product/Single';
 import AddToCartButton from '../components/product/AddToCartButton';
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 const ProductPage = (props) => {
   const { data, errors } = props;
 
   const product = (data || {}).product;
   const productVariants = product.variants;
-  const variantTypeTitle = productVariants[0]._type;
+  const variantTypeTitle = capitalizeFirstLetter(productVariants[0]._type);
 
   let variantOptions = [];
   let variantOptionsString = '';
-  productVariants.forEach((item, index) => {
+  productVariants.forEach((item) => {
     let singleVariant = `${item.title}[+${item.priceDifferential}]`;
     variantOptions.push(singleVariant);
   });
@@ -149,13 +153,14 @@ const ProductPage = (props) => {
                 <AddToCartButton
                   _id={`${product._id}-${variantTitle}`}
                   title={product.title}
-                  price={product.basePrice}
+                  basePrice={product.basePrice}
                   image={product.media[0].asset.url}
                   slug={productSlug}
-                  description={product.description}
+                  description={product.excerpt}
                   variantType={variantTypeTitle}
                   variantOptions={variantOptionsString}
                   variantTitle={variantTitle}
+                  variantPrice={displayPrice}
                 />
               </div>
 
@@ -187,7 +192,7 @@ const ProductPage = (props) => {
                 {product.includedItems.length !== 0 && (
                   <ProductAccordionItem
                     uuid='includedItems'
-                    title='Items included with this item'
+                    title='Included items'
                   >
                     <div className='grid grid-cols-2 gap-4'>
                       {product.includedItems.map((item) => (
@@ -298,6 +303,7 @@ export const query = graphql`
           }
         }
       }
+      excerpt
       description
       ingredients
       careInstructions
