@@ -5,19 +5,20 @@ const AddToCartButton = (props) => {
     _id,
     title,
     description,
-    price,
+    basePrice,
     slug,
     image,
     variantType,
     variantOptions,
     variantTitle,
+    variantPrice,
   } = props;
 
   return (
     <button
       className='snipcart-add-item text-white font-bold w-full py-2 px-4 rounded bg-mountbattenPink-400 shadow-md hover:bg-mountbattenPink-500 hover:shadow-2xl'
       data-item-id={_id}
-      data-item-price={price}
+      data-item-price={basePrice}
       data-item-url={slug}
       data-item-description={description}
       data-item-image={image && image}
@@ -31,7 +32,7 @@ const AddToCartButton = (props) => {
       data-item-custom2-type='checkbox'
       data-item-custom3-name='Gift note or message (optional)'
       data-item-custom3-type='textarea'
-    >{`Add to cart - RM${price}`}</button>
+    >{`Add to cart - RM${variantPrice}`}</button>
   );
 };
 
