@@ -60,19 +60,19 @@ const ProductPage = (props) => {
           {/* breadcrumbs */}
           <section className='my-8 text-sm md:text-base'>
             <div className='inline'>
-              <p className='inline text-gray-500 hover:text-fuchsiaRose-500'>
+              <p className='inline text-gray-500 hover:text-gray-700'>
                 <Link to='/'>Home</Link>
               </p>
               <p className='inline text-gray-500'>
                 {'  '}/{'  '}
               </p>
-              <p className='inline text-gray-500 hover:text-fuchsiaRose-500'>
+              <p className='inline text-gray-500 hover:text-gray-700'>
                 <Link to='/shop'>Shop</Link>
               </p>
               <p className='inline text-gray-500'>
                 {'  '}/{'  '}
               </p>
-              <p className='inline text-gray-500 hover:text-fuchsiaRose-500'>
+              <p className='inline text-gray-500 hover:text-gray-700'>
                 <Link to={`/shop/category/${categorySlug}`}>
                   {product.category.title}
                 </Link>
@@ -118,13 +118,16 @@ const ProductPage = (props) => {
               </h2>
               <div className='mt-5 flex justify-between items-start'>
                 <div>
-                  <p className='text-sm md:text-base text-gray-600 mb-3'>
+                  <p className='text-sm md:text-base font-medium text-gray-600 mb-3'>
                     {`Select a ${variantTypeTitle}:`}
                   </p>
                   {productVariants.map((item, index) => (
-                    <div key={item._key} className='flex'>
+                    <label
+                      key={item._key}
+                      className='flex items-center my-2 cursor-pointer'
+                    >
                       <input
-                        className='mr-2'
+                        className='mr-2 cursor-pointer text-mountbattenPink-400'
                         type='radio'
                         id={item.title}
                         name={variantTypeTitle}
@@ -137,10 +140,13 @@ const ProductPage = (props) => {
                           setVariantTitle(item.title);
                         }}
                       />
-                      <label className='text-base' htmlFor={variantTypeTitle}>
+                      <span
+                        className='text-base text-gray-800 ml-1'
+                        htmlFor={variantTypeTitle}
+                      >
                         {item.title}
-                      </label>
-                    </div>
+                      </span>
+                    </label>
                   ))}
                 </div>
                 <div>
