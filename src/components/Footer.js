@@ -63,7 +63,7 @@ const Footer = () => {
                 <input
                   type='email'
                   placeholder='siti@example.com'
-                  class='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                  className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
                 />
                 <button className='w-full mx-auto mt-2 px-4 py-2 block text-center rounded-md text-white bg-fuchsiaRose-500'>
                   Subscribe
