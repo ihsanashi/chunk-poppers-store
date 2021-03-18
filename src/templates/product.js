@@ -151,7 +151,7 @@ const ProductPage = (props) => {
                 </div>
                 <div>
                   <h5 className='text-2xl text-gray-800 text-right font-medium'>
-                    {`RM${displayPrice}`}
+                    {`RM ${displayPrice}`}
                   </h5>
                 </div>
               </div>
