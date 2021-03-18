@@ -76,7 +76,7 @@ const Footer = () => {
               Made possible with
             </h5>
             <div>
-              <ul className='flex flex-col items-start justify-between my-5'>
+              <ul className='grid grid-cols-3 lg:grid-cols-2 gap-4 my-5'>
                 <li className='mb-2'>
                   <a
                     href='https://snipcart.com/'
@@ -84,7 +84,7 @@ const Footer = () => {
                     rel='noreferrer'
                   >
                     <img
-                      className='h-8 lg:h-12 w-auto'
+                      className='h-full w-full object-contain'
                       src={snipcartLogo}
                       alt='Snipcart logo'
                     />
@@ -97,7 +97,7 @@ const Footer = () => {
                     rel='noreferrer'
                   >
                     <img
-                      className='h-8 lg:h-16 w-auto'
+                      className='h-full w-full object-contain'
                       src={stripeLogo}
                       alt='Stripe logo'
                     />
@@ -110,7 +110,7 @@ const Footer = () => {
                     rel='noreferrer'
                   >
                     <img
-                      className='h-6 lg:h-8 w-auto'
+                      className='h-full w-full object-contain'
                       src={sanityLogo}
                       alt='Sanity logo'
                     />
