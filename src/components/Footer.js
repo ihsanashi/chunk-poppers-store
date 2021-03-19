@@ -121,7 +121,7 @@ const Footer = () => {
           </div>
         </section>
         <div className='border-b-2 border-gray-200 my-5'></div>
-        <section className='flex flex-col sm:flex-row items-start md:items-center justify-between'>
+        <section className='flex flex-row items-center justify-between'>
           <div className='flex flex-row items-center'>
             <a
               className='mr-5 text-fuchsiaRose-400 hover:text-fuchsiaRose-600'
@@ -148,10 +148,10 @@ const Footer = () => {
               <FaRegEnvelope size={20} />
             </a>
           </div>
-          <div className='flex flex-row items-center mt-5 sm:mt-0'>
+          <div className='flex flex-row items-center'>
             {data.allSanityLegal.edges.map((item) => (
               <Link to={`/legal/${item.node.slug.current}`} key={item.node._id}>
-                <p className='text-sm text-gray-600 mr-5 sm:mr-0 sm:ml-5'>
+                <p className='text-xs md:text-sm text-gray-600 ml-5'>
                   {item.node.pageName}
                 </p>
               </Link>
