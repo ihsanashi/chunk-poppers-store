@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
+import { useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import ProductAccordion from '../components/product/Accordion';
@@ -50,30 +50,30 @@ const ProductPage = (props) => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>
           {`${product.title} - ${product.category.title} | Shop - Chunk Poppers`}
         </title>
-      </Helmet>
+      </Head>
       <Layout>
         <Container>
           {/* breadcrumbs */}
           <section className='my-8 text-sm md:text-base'>
             <div className='inline'>
               <p className='inline text-gray-500 hover:text-gray-700'>
-                <Link to='/'>Home</Link>
+                <Link href='/'>Home</Link>
               </p>
               <p className='inline text-gray-500'>
                 {'  '}/{'  '}
               </p>
               <p className='inline text-gray-500 hover:text-gray-700'>
-                <Link to='/shop'>Shop</Link>
+                <Link href='/shop'>Shop</Link>
               </p>
               <p className='inline text-gray-500'>
                 {'  '}/{'  '}
               </p>
               <p className='inline text-gray-500 hover:text-gray-700'>
-                <Link to={`/shop/category/${categorySlug}`}>
+                <Link href={`/shop/category/${categorySlug}`}>
                   {product.category.title}
                 </Link>
               </p>
@@ -91,10 +91,10 @@ const ProductPage = (props) => {
           '
           >
             <div>
-              <Img
+              {/* <Image
                 fluid={product.media[mainImageIndex].asset.fluid}
                 alt={product.media[mainImageIndex].caption}
-              />
+              /> */}
               <div className='grid grid-cols-4 gap-4 mt-3 md:mt-5'>
                 {product.media.map((item, index) => (
                   <button
@@ -107,7 +107,7 @@ const ProductPage = (props) => {
                     }
                     onClick={() => setMainImageIndex(index)}
                   >
-                    <Img fluid={item.asset.fluid} alt={item.caption} />
+                    {/* <Image fluid={item.asset.fluid} alt={item.caption} /> */}
                   </button>
                 ))}
               </div>
@@ -255,111 +255,3 @@ const ProductPage = (props) => {
 };
 
 export default ProductPage;
-
-export const query = graphql`
-  query productAndSimilarItems(
-    $_id: String
-    $slug: String
-    $categoryTitle: String
-  ) {
-    product: sanityProduct(
-      _id: { eq: $_id }
-      slug: { current: { eq: $slug } }
-      category: { title: { eq: $categoryTitle } }
-    ) {
-      _id
-      title
-      basePrice
-      category {
-        title
-        slug {
-          current
-        }
-      }
-      slug {
-        current
-      }
-      variants {
-        ... on SanityColor {
-          _key
-          _type
-          priceDifferential
-          title
-        }
-        ... on SanityQuantity {
-          _key
-          _type
-          priceDifferential
-          title
-        }
-        ... on SanitySize {
-          _key
-          _type
-          priceDifferential
-          title
-        }
-      }
-      media {
-        _key
-        caption
-        asset {
-          url
-          fluid(maxWidth: 600, maxHeight: 600) {
-            ...GatsbySanityImageFluid
-          }
-        }
-      }
-      excerpt
-      description
-      ingredients
-      careInstructions
-      allergens
-      includedItems {
-        _id
-        details
-        title
-        image {
-          caption
-          asset {
-            fluid(maxWidth: 300, maxHeight: 300) {
-              ...GatsbySanityImageFluid
-            }
-          }
-        }
-      }
-    }
-    similarItems: allSanityProduct(
-      filter: {
-        category: { title: { eq: $categoryTitle } }
-        _id: { ne: $_id }
-        slug: { current: { ne: $slug } }
-      }
-      sort: { fields: title, order: ASC }
-      limit: 4
-    ) {
-      edges {
-        node {
-          _id
-          title
-          basePrice
-          slug {
-            current
-          }
-          media {
-            asset {
-              fluid(maxHeight: 400, maxWidth: 400) {
-                ...GatsbySanityImageFluid
-              }
-            }
-          }
-          category {
-            title
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  }
-`;

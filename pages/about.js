@@ -1,9 +1,7 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import Container from '../components/Container';
-import Layout from '../components/Layout';
+import Head from 'next/head';
+import Image from 'next/image';
+import Container from '../src/components/Container';
+import Layout from '../src/components/Layout';
 import PortableText from '@sanity/block-content-to-react';
 
 const AboutPage = (props) => {
@@ -11,12 +9,12 @@ const AboutPage = (props) => {
   const about = (data || {}).sanityAbout;
   return (
     <>
-      <Helmet>
+      <Head>
         <title>About - Chunk Poppers</title>
-      </Helmet>
+      </Head>
       <Layout>
         <Container>
-          <main className='grid grid-cols-1 md:grid-cols-2 gap-4 text-center md:text-left my-20'>
+          {/* <main className='grid grid-cols-1 md:grid-cols-2 gap-4 text-center md:text-left my-20'>
             <div>
               <h2 className='font-semibold text-3xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-fuchsiaRose-300 to-pearlyPurple-500'>
                 {about.heroTitle}
@@ -27,23 +25,23 @@ const AboutPage = (props) => {
                 {about.heroSubtitle}
               </p>
             </div>
-          </main>
-          <section className='grid grid-cols-2 gap-4 my-20'>
+          </main> */}
+          {/* <section className='grid grid-cols-2 gap-4 my-20'>
             {about.gallery.map((item) => (
               <div key={item._key}>
-                <Img className='rounded-lg' fluid={item.asset.fluid} />
+                <Image className='rounded-lg' fluid={item.asset.fluid} />
               </div>
             ))}
-          </section>
+          </section> */}
         </Container>
-        <section className='px-5 md:px-10 lg:px-20 py-20 my-20 text-center bg-mountbattenPink-50'>
+        {/* <section className='px-5 md:px-10 lg:px-20 py-20 my-20 text-center bg-mountbattenPink-50'>
           <Container>
             <PortableText blocks={about._rawContent} />
           </Container>
-        </section>
+        </section> */}
         <Container>
           <section className='my-20'>
-            <div className='text-center'>
+            {/* <div className='text-center'>
               <h6 className='text-sm text-gray-400 font-semibold uppercase'>
                 {about.featuresSubtitle}
               </h6>
@@ -53,9 +51,9 @@ const AboutPage = (props) => {
               <p className='text-base md:text-lg text-gray-700 font-normal max-w-xl mx-auto'>
                 {about.featuresDesc}
               </p>
-            </div>
+            </div> */}
           </section>
-          <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-20'>
+          {/* <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-20'>
             {about.features.map((item) => (
               <div
                 key={item._key}
@@ -74,7 +72,7 @@ const AboutPage = (props) => {
                 </div>
               </div>
             ))}
-          </section>
+          </section> */}
         </Container>
       </Layout>
     </>
@@ -82,39 +80,3 @@ const AboutPage = (props) => {
 };
 
 export default AboutPage;
-
-export const query = graphql`
-  query {
-    sanityAbout {
-      _id
-      heroTitle
-      heroSubtitle
-      gallery {
-        _key
-        caption
-        asset {
-          fluid(maxHeight: 400, maxWidth: 400) {
-            ...GatsbySanityImageFluid
-          }
-        }
-      }
-      featuresTitle
-      featuresSubtitle
-      featuresDesc
-      features {
-        _key
-        title
-        description
-        icon {
-          caption
-          asset {
-            fixed(height: 24, width: 24) {
-              ...GatsbySanityImageFixed
-            }
-          }
-        }
-      }
-      _rawContent
-    }
-  }
-`;

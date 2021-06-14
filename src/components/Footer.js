@@ -1,38 +1,18 @@
-import React from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import Link from 'next/link';
 import Container from './Container';
 import Logo from '../components/Logo';
 import footer_links from '../data/footer_links';
-import snipcartLogo from '../images/snipcart_logo.png';
-import stripeLogo from '../images/stripe_logo.png';
-import sanityLogo from '../images/sanity_logo.png';
 import { FaInstagram, FaFacebookSquare, FaRegEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   const date = new Date();
-
-  const data = useStaticQuery(graphql`
-    {
-      allSanityLegal {
-        edges {
-          node {
-            _id
-            pageName
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  `);
 
   return (
     <footer className='pt-12 pb-10 bg-gray-50'>
       <Container>
         <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4'>
           <div className='col-span-1 lg:col-span-2'>
-            <Link to='/'>
+            <Link href='/'>
               <Logo />
             </Link>
             <h6 className='font-normal text-base text-gray-700 mt-8 mb-5'>
@@ -50,7 +30,7 @@ const Footer = () => {
             <ul className='list-none'>
               {footer_links.map((item) => (
                 <li key={item.name} className='text-sm text-gray-600 my-5'>
-                  <Link to={item.link}>{item.name}</Link>
+                  <Link href={item.link}>{item.name}</Link>
                 </li>
               ))}
             </ul>
@@ -85,7 +65,7 @@ const Footer = () => {
                   >
                     <img
                       className='h-full w-full object-contain'
-                      src={snipcartLogo}
+                      src='/images/snipcart_logo.png'
                       alt='Snipcart logo'
                     />
                   </a>
@@ -98,7 +78,7 @@ const Footer = () => {
                   >
                     <img
                       className='h-full w-full object-contain'
-                      src={stripeLogo}
+                      src='images/stripe_logo.png'
                       alt='Stripe logo'
                     />
                   </a>
@@ -111,7 +91,7 @@ const Footer = () => {
                   >
                     <img
                       className='h-full w-full object-contain'
-                      src={sanityLogo}
+                      src='images/sanity_logo.png'
                       alt='Sanity logo'
                     />
                   </a>
@@ -148,15 +128,18 @@ const Footer = () => {
               <FaRegEnvelope size={20} />
             </a>
           </div>
-          <div className='flex flex-row items-center'>
+          {/* <div className='flex flex-row items-center'>
             {data.allSanityLegal.edges.map((item) => (
-              <Link to={`/legal/${item.node.slug.current}`} key={item.node._id}>
+              <Link
+                href={`/legal/${item.node.slug.current}`}
+                key={item.node._id}
+              >
                 <p className='text-xs md:text-sm text-gray-600 ml-5'>
                   {item.node.pageName}
                 </p>
               </Link>
             ))}
-          </div>
+          </div> */}
         </section>
       </Container>
     </footer>

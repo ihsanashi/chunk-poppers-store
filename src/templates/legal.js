@@ -1,6 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { graphql, Link } from 'gatsby';
+import Head from 'next/head';
+import Link from 'next/link';
 import Logo from '../components/Logo';
 import Layout from '../components/Layout';
 import PortableText from '@sanity/block-content-to-react';
@@ -30,14 +29,14 @@ const LegalPage = (props) => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{`${legal.pageName} - Chunk Poppers`}</title>
-      </Helmet>
+      </Head>
       <main className='max-w-4xl mx-auto px-4'>
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
           <aside className='lg:col-span-3 lg:h-full lg:min-h-screen py-6 lg:py-12 border-b lg:border-r border-gray-200 lg:border-gray-200'>
             <section className='static lg:fixed'>
-              <Link to='/'>
+              <Link href='/'>
                 <Logo />
               </Link>
               <div className='mt-7'>

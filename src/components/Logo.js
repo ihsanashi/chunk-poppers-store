@@ -1,23 +1,16 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export const Logo = () => {
-  const data = useStaticQuery(graphql`
-    query logo {
-      file(relativePath: { eq: "cp-logo.png" }) {
-        childImageSharp {
-          fixed(height: 60, width: 60) {
-            ...GatsbyImageSharpFixed
-            src
-          }
-        }
-      }
-    }
-  `);
-
   return (
-    <Img fixed={data.file.childImageSharp.fixed} alt='Chunk Poppers logo' />
+    <Link href='/'>
+      <Image
+        src='/images/cp-logo.png'
+        width={60}
+        height={60}
+        alt='Chunk Poppers logo'
+      />
+    </Link>
   );
 };
 

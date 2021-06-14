@@ -1,10 +1,9 @@
-import React from 'react';
 import { Helmet } from 'react-helmet';
-import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import Layout from '../components/Layout';
-import Container from '../components/Container';
-import LabelWithInput from '../components/LabelWithInput';
+import Head from 'next/head';
+import Image from 'next/image';
+import Layout from '../src/components/Layout';
+import Container from '../src/components/Container';
+import LabelWithInput from '../src/components/LabelWithInput';
 
 const ContactPage = (props) => {
   const { data } = props;
@@ -23,7 +22,7 @@ const ContactPage = (props) => {
           />
         </section>
 
-        <main className='bg-gray-100 py-10 lg:py-16'>
+        {/* <main className='bg-gray-100 py-10 lg:py-16'>
           <Container>
             <div className='max-w-md mx-auto text-center my-12'>
               <h3 className='font-semibold text-gray-900 text-3xl lg:text-4xl'>
@@ -131,31 +130,10 @@ const ContactPage = (props) => {
               </div>
             </div>
           </Container>
-        </main>
+        </main> */}
       </Layout>
     </>
   );
 };
 
 export default ContactPage;
-
-export const query = graphql`
-  query {
-    sanityContact {
-      sectionTitle
-      sectionSubtitle
-      contactInfo {
-        _key
-        title
-        subtitle
-        icon {
-          asset {
-            fixed(height: 24, width: 24) {
-              ...GatsbySanityImageFixed
-            }
-          }
-        }
-      }
-    }
-  }
-`;

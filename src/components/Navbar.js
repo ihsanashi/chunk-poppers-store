@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'gatsby';
+import { useState, useEffect, useContext } from 'react';
+import Link from 'next/link';
 import nav_links from '../data/nav_links';
 import Logo from './Logo';
 import { BiUserCircle, BiBasket, BiMenu, BiX } from 'react-icons/bi';
-
-import { SnipcartContext } from 'gatsby-plugin-snipcart-advanced/context';
 
 const Navbar = () => {
   const [width, setWidth] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
 
-  const { state } = useContext(SnipcartContext);
-  const { cartQuantity } = state;
+  // const { state } = useContext(SnipcartContext);
+  // const { cartQuantity } = state;
 
   const updateWidth = () => {
     setWidth(window.innerWidth);
@@ -33,7 +31,7 @@ const Navbar = () => {
     <header className='max-w-6xl mx-auto p-3 lg:p-8'>
       <nav className='flex items-center justify-between'>
         <div className='order-2 lg:order-first lg:flex-grow-0'>
-          <Link to='/'>
+          <Link href='/'>
             <Logo />
           </Link>
         </div>
@@ -50,7 +48,7 @@ const Navbar = () => {
               className='px-5 my-8 lg:my-0 text-3xl lg:text-lg'
             >
               <Link
-                to={item.link}
+                href={item.link}
                 activeClassName='text-purple-500'
                 className='text-gray-500 hover:text-purple-700'
               >
@@ -71,9 +69,9 @@ const Navbar = () => {
               size={24}
               className='text-gray-500 group-hover:text-fuchsiaRose-500'
             />
-            <span className='pl-1 md:pl-2 text-gray-500 group-hover:text-fuchsiaRose-500'>
+            {/* <span className='pl-1 md:pl-2 text-gray-500 group-hover:text-fuchsiaRose-500'>
               {cartQuantity}
-            </span>
+            </span> */}
           </button>
         </div>
         <button

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import Layout from '../components/Layout';
-import Container from '../components/Container';
+import { useState } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+import Layout from '../src/components/Layout';
+import Container from '../src/components/Container';
 import {
   Accordion,
   AccordionItem,
@@ -17,15 +16,15 @@ import { BiChevronUp, BiChevronDown } from 'react-icons/bi';
 const SupportPage = (props) => {
   const { data } = props;
   const supportContent = (data || {}).allSanitySupport;
-  const supportEdges = supportContent.edges;
+  // const supportEdges = supportContent.edges;
 
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>Support - Chunk Poppers</title>
-      </Helmet>
+      </Head>
       <Layout>
         <Container>
           <section className='mx-auto text-center mt-20 mb-12'>
@@ -38,7 +37,7 @@ const SupportPage = (props) => {
               <strong className='text-gray-800'>please get in touch</strong>.
             </p>
           </section>
-          <section className='grid grid-cols-2 md:grid-cols-4 gap-4 mb-20'>
+          {/* <section className='grid grid-cols-2 md:grid-cols-4 gap-4 mb-20'>
             {supportEdges.map((item, index) => (
               <button
                 key={item.node._id}
@@ -49,14 +48,14 @@ const SupportPage = (props) => {
                     : 'border-gray-300'
                 } border hover:border-fuchsiaRose-200 rounded-md text-center p-5`}
               >
-                <Img fixed={item.node.icon.asset.fixed} />
+                <Image fixed={item.node.icon.asset.fixed} />
                 <h5 className='text-sm md:text-base font-medium text-gray-800'>
                   {item.node.categoryTitle}
                 </h5>
               </button>
             ))}
-          </section>
-          <section className='max-w-2xl mx-auto my-20'>
+          </section> */}
+          {/* <section className='max-w-2xl mx-auto my-20'>
             <div className='mb-24'>
               <h4 className='font-semibold text-2xl text-center mb-2'>
                 {supportEdges[activeCategory].node.categoryTitle}
@@ -94,7 +93,7 @@ const SupportPage = (props) => {
                 </Accordion>
               ))}
             </div>
-          </section>
+          </section> */}
         </Container>
       </Layout>
     </>
@@ -102,29 +101,3 @@ const SupportPage = (props) => {
 };
 
 export default SupportPage;
-
-export const query = graphql`
-  {
-    allSanitySupport(sort: { fields: categoryTitle, order: ASC }) {
-      edges {
-        node {
-          _id
-          categoryTitle
-          categoryDescription
-          icon {
-            asset {
-              fixed(height: 32, width: 32) {
-                ...GatsbySanityImageFixed
-              }
-            }
-          }
-          faq {
-            _key
-            question
-            answer
-          }
-        }
-      }
-    }
-  }
-`;

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { graphql, Link } from 'gatsby';
+import Head from 'next/head';
+import Link from 'next/link';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import SingleProduct from '../components/product/Single';
@@ -21,23 +20,23 @@ const CategoryPage = (props) => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{category.title} | Shop - Chunk Poppers</title>
-      </Helmet>
+      </Head>
       <Layout>
         <Container>
           <section className='mb-8'>
             <div className='inline'>
               <small>
-                <Link to='/'>Home / </Link>
+                <Link href='/'>Home / </Link>
               </small>
               <small>
-                <Link to='/shop'>Shop / </Link>
+                <Link href='/shop'>Shop / </Link>
               </small>
               <small className='text-gray-600'>{category.title}</small>
             </div>
           </section>
-          <section className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20'>
+          {/* <section className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20'>
             {category.products.map((item) => (
               <SingleProduct
                 key={item._id}
@@ -48,7 +47,7 @@ const CategoryPage = (props) => {
                 basePrice={item.basePrice}
               />
             ))}
-          </section>
+          </section> */}
         </Container>
       </Layout>
     </>
