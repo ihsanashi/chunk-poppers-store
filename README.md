@@ -1,10 +1,10 @@
-### Introduction
+## Introduction
 
 This is an ongoing e-commerce project I started for my wife, to bring her dessert products on a web store. The project originally started with Gatsby, but I'm in the middle of migrating it to Next.js. Products information are stored with [Sanity.io](https://www.sanity.io/), while [Snipcart](https://snipcart.com/) acts as the shopping cart platform and back-office management dashboard.
 
 The project is currently on hold as we recently moved and don't have a functioning kitchen. I will resume this after the kitchen makeover is completed.
 
-#### Technologies
+### Technologies
 
 - React and Next.js for UI
 
@@ -14,9 +14,11 @@ The project is currently on hold as we recently moved and don't have a functioni
 
 - Snipcart for the shopping cart and back-office operations
 
-  
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+### Screenshots
+
+![Homepage](./public/screenshots/homepage.png)
 
 ## Getting Started
 
