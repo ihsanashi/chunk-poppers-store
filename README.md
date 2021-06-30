@@ -1,3 +1,13 @@
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+    - [Technologies](#technologies)
+    - [Screenshots](#screenshots)
+  - [Getting Started](#getting-started)
+  - [Learn More](#learn-more)
+  - [Deploy on Vercel](#deploy-on-vercel)
+
 ## Introduction
 
 This is an ongoing e-commerce project I started for my wife, to bring her dessert products on a web store. The project originally started with Gatsby, but I'm in the middle of migrating it to Next.js. Products information are stored with [Sanity.io](https://www.sanity.io/), while [Snipcart](https://snipcart.com/) acts as the shopping cart platform and back-office management dashboard.
